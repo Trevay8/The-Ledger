@@ -197,3 +197,5 @@ main { max-width: 760px; margin: 0 auto; padding: 14px 16px 48px; outline: none;
 .status-row span:last-child { color: var(--muted); text-align: right; }
 .more-btn { display: block; width: 100%; margin-top: 12px; padding: 12px; border: 1px solid var(--line-2); border-radius: 10px; color: var(--blue-soft); font: 500 13px var(--mono); }
 .toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--surface-2); border: 1px solid var(--line-2); padding: 10px 14px; border-radius: 10px; font-size: 13px; z-index: 50; }
+.claude-btn { color: #d97757; background: rgba(217, 119, 87, 0.12); width: 36px; height: 36px; margin-left: 2px; }
+.claude-btn:active { background: rgba(217, 119, 87, 0.25); }
