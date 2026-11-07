@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>The Ledger</title>
+  <meta name="description" content="Daily commercial awareness: UK & European real estate, rates and deals.">
+  <meta name="theme-color" content="#070b12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="The Ledger">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn" aria-label="Open menu" aria-controls="drawer" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    </button>
+    <a href="#/" class="brand">
+      <span class="brand-mark">L</span>
+      <span class="brand-text">THE LEDGER</span>
+    </a>
+    <span class="page-name" id="pageName"></span>
+    <button class="icon-btn" id="refreshBtn" aria-label="Refresh data">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+    </button>
+  </header>
+
+  <div class="scrim" id="scrim" hidden></div>
+  <nav class="drawer" id="drawer" aria-label="Main" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="brand-mark">L</span>
+      <div>
+        <div class="drawer-title">THE LEDGER</div>
+        <div class="drawer-sub">UK &amp; Europe · Real estate · Macro</div>
+      </div>
+    </div>
+    <a href="#/" data-route="home"><span class="nav-ico">◆</span>Home</a>
+    <a href="#/markets" data-route="markets"><span class="nav-ico">≡</span>Market Updates</a>
+    <a href="#/reports" data-route="reports"><span class="nav-ico">▤</span>Quarterly Reports</a>
+    <a href="#/deals" data-route="deals"><span class="nav-ico">⇄</span>Recent Deals</a>
+    <div class="drawer-sep"></div>
+    <a href="#/saved" data-route="saved"><span class="nav-ico">★</span>Saved</a>
+    <a href="#/sources" data-route="sources"><span class="nav-ico">◎</span>Sources &amp; Data</a>
+    <div class="drawer-foot" id="drawerFoot"></div>
+  </nav>
+
+  <main id="view" tabindex="-1"></main>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>

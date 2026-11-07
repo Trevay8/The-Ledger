@@ -1,0 +1,33 @@
+{
+  "_howToUpdate": "Each quarter: copy every 'yield' into 'prev', type the new figure into 'yield', change 'conf' to 'verified' once you've checked it against a broker sheet, and update 'asOf' + 'source'. The app shows the QoQ move in bps and the yield gap vs the 10Y gilt (UK) or 10Y Bund (Europe).",
+  "asOf": "Q3 2026",
+  "updated": "2026-11-07",
+  "note": "Indicative seed. Rows marked 'est' are estimates, not quotes - verify against CBRE / Savills / Knight Frank prime yield sheets before using them in an interview.",
+  "markets": [
+    { "region": "UK", "sector": "Office", "market": "London West End", "yield": 3.75, "prev": null, "conf": "verified", "source": "Knight Frank / Savills, Q2 2026" },
+    { "region": "UK", "sector": "Office", "market": "London City", "yield": 5.25, "prev": null, "conf": "verified", "source": "Knight Frank / Savills, Q2 2026" },
+    { "region": "UK", "sector": "Office", "market": "Regional (Big 6)", "yield": 6.75, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "UK", "sector": "Logistics", "market": "Distribution (20yr)", "yield": 5.00, "prev": null, "conf": "verified", "source": "Knight Frank, Mar 2026" },
+    { "region": "UK", "sector": "Logistics", "market": "Multi-let industrial", "yield": 5.00, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "UK", "sector": "Retail", "market": "Shopping centres", "yield": 7.25, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "UK", "sector": "Retail", "market": "Retail warehouse", "yield": 5.75, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "UK", "sector": "Retail", "market": "High street", "yield": 6.25, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "UK", "sector": "Living", "market": "PBSA London", "yield": 4.50, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "UK", "sector": "Living", "market": "PBSA Regional", "yield": 5.25, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "UK", "sector": "Living", "market": "BTR London", "yield": 4.00, "prev": null, "conf": "est", "source": "Estimate" },
+
+    { "region": "Europe", "sector": "Office", "market": "Europe average", "yield": 5.10, "prev": 4.97, "conf": "verified", "source": "Savills, Q3 2026 (+13bps QoQ)" },
+    { "region": "Europe", "sector": "Office", "market": "Paris CBD", "yield": 4.25, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "Europe", "sector": "Office", "market": "Frankfurt", "yield": 4.75, "prev": null, "conf": "est", "source": "Estimate (German top 6 +10-20bps in Q3, Savills)" },
+    { "region": "Europe", "sector": "Office", "market": "Munich", "yield": 4.30, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "Europe", "sector": "Office", "market": "Madrid", "yield": 4.50, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "Europe", "sector": "Office", "market": "Amsterdam", "yield": 4.60, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "Europe", "sector": "Office", "market": "Milan", "yield": 4.25, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "Europe", "sector": "Office", "market": "Dublin", "yield": 5.25, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "Europe", "sector": "Logistics", "market": "Europe average", "yield": 5.30, "prev": 5.23, "conf": "verified", "source": "Cushman & Wakefield, Q3 2026 (+7bps QoQ)" },
+    { "region": "Europe", "sector": "Logistics", "market": "Germany (top 7)", "yield": 4.40, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "Europe", "sector": "Logistics", "market": "Paris region", "yield": 4.75, "prev": null, "conf": "est", "source": "Estimate" },
+    { "region": "Europe", "sector": "Logistics", "market": "Spain", "yield": 5.00, "prev": null, "conf": "verified", "source": "Savills outlook, 2026" },
+    { "region": "Europe", "sector": "Logistics", "market": "Netherlands", "yield": 4.70, "prev": null, "conf": "verified", "source": "Savills outlook, 2026" }
+  ]
+}
