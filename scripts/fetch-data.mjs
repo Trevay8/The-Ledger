@@ -109,7 +109,7 @@ const LOGI_CONTEXT_RX = /\b(property|properties|real estate|rents?|rental|take-u
 const NAMED_PLAYER_RX = /\b(Vonovia|LEG Immobilien|Heimstaden|Grainger|Unite|Empiric|Aroundtown|TAG Immobilien|Get Living|Quintain|Prologis|SEGRO|Tritax|VGP|Montea|CTP|Panattoni|GLP|P3|Logicor|Mileway|WDP|LondonMetric|Catena|Sagax)\b/;
 
 const COUNTRIES = [
-  ['UK', UK_RX],
+  ['UK', null],
   ['Germany', /\b(German\w*|Berlin|Munich|Frankfurt|Hamburg|Düsseldorf|Cologne|Stuttgart|Leipzig|Vonovia|LEG Immobilien|TAG Immobilien|Aroundtown)\b/],
   ['France', /\b(France|French|Paris|Lyon|Marseille|Lille)\b/],
   ['Spain', /\b(Spain|Spanish|Madrid|Barcelona|Valencia|Seville|Malaga)\b/],
@@ -120,7 +120,7 @@ const COUNTRIES = [
   ['Italy', /\b(Italy|Italian|Milan|Rome|Turin)\b/],
 ];
 function countryOf(title, source) {
-  for (const [c, rx] of COUNTRIES) if (rx.test(title)) return c;
+  for (const [c, rx] of COUNTRIES) if ((rx || UK_RX).test(title)) return c;
   if (/^(Property Week|EG|React News|Property Industry Eye|City AM|PBSA News|BTR News)$/.test(source)) return 'UK';
   return 'Europe';
 }
