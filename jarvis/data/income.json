@@ -1,0 +1,20 @@
+{
+  "generated": "2026-11-07T21:00:00Z",
+  "goal": { "low": 500, "high": 2000, "by": "2026-12-31", "currency": "£" },
+  "challenge": {
+    "name": "AI Income Challenge (Iman Gadzhi)",
+    "start": "2026-11-07",
+    "end": "2026-11-15",
+    "vip": "17:00",
+    "main": "18:00",
+    "note": "UK times. 12:00 / 13:00 Eastern, running 7-15 Nov. Links arrive by email from imangadzhi@consulting.com, so check Promotions.",
+    "inbox": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#search/from%3Aconsulting.com+OR+from%3Awhop.com"
+  },
+  "pushback": "Treat the challenge as a free source of tactics, not a plan. These challenges usually end with a paid upsell. Decide your budget ceiling before Day 5 so the pitch doesn't decide it for you. Your edge isn't 'AI'. It's that you're a Bayes REI student with a CBRE IM seat who has cold-emailed 60+ REPE professionals with a decent reply rate. Sell what only you can make.",
+  "ideas": [
+    { "id": "i1", "title": "REPE cold-outreach playbook + templates", "why": "You've run 60+ researched cold emails with ~25% warm replies. Students pay for proven scripts, trackers and the research method.", "price": "£19-29", "fit": "high" },
+    { "id": "i2", "title": "Real estate modelling templates (acquisition, DCF, waterfall)", "why": "Built while you study. Sells on Gumroad / Etsy / Whop to students and junior analysts. Also proves skill to recruiters.", "price": "£15-49", "fit": "high" },
+    { "id": "i3", "title": "REPE interview flashcard / case-study pack", "why": "You're already making flashcards for Jarvis. Package the technicals (IRR, waterfall, cap rates, debt metrics) into an Anki / Notion pack.", "price": "£9-19", "fit": "medium" },
+    { "id": "i4", "title": "Notion career OS (application + networking tracker)", "why": "You already run this system in Notion. A template is quick to package and low effort to sell.", "price": "£7-15", "fit": "medium" }
+  ]
+}

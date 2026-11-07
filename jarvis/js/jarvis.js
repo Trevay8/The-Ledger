@@ -5,7 +5,7 @@
   const $ = (s, el = document) => el.querySelector(s);
   const view = $('#view');
   const sheet = $('#sheet');
-  const D = { brief: null, apps: null, net: null, cards: null, tt: null, club: null };
+  const D = { brief: null, apps: null, net: null, cards: null, tt: null, club: null, income: null };
 
   // ------------------------------------------------------------ storage (per-device)
   const KEY = 'jarvis:';
@@ -21,6 +21,8 @@
     netDone: load('netDone', {}),        // name -> ISO date of local follow-up
     ui: load('ui', { deck: 'all', appFilter: 'live', netFilter: 'action' }),
     seeded: load('seeded', {}),
+    clubEvents: load('clubEvents', []), // [{id,title,date,time,stage,speaker,room,checks:{}}]
+    income: load('income', { revenue: [], notes: {}, ideas: {} }),
   };
   const persist = (k) => save(k, S[k]);
 
@@ -48,7 +50,7 @@
     document.body.appendChild(t);
     setTimeout(() => t.remove(), 2200);
   }
-  const AREA = { msc: ['MSc', 'accent'], club: ['Club', 'violet'], apps: ['Apps', 'warn'], network: ['Network', 'good'], life: ['Life', ''] };
+  const AREA = { msc: ['MSc', 'accent'], club: ['Club', 'violet'], apps: ['Apps', 'warn'], network: ['Network', 'good'], income: ['Income', 'good'], life: ['Life', ''] };
   const areaTag = (a) => { const [l, c] = AREA[a] || ['General', '']; return `<span class="tag ${c}">${l}</span>`; };
 
   // ------------------------------------------------------------ data
@@ -58,7 +60,7 @@
     return r.json();
   }
   async function fetchAll(bust = false) {
-    const files = { brief: 'brief', apps: 'applications', net: 'network', cards: 'flashcards', tt: 'timetable', club: 'club' };
+    const files = { brief: 'brief', apps: 'applications', net: 'network', cards: 'flashcards', tt: 'timetable', club: 'club', income: 'income' };
     await Promise.all(Object.entries(files).map(async ([k, f]) => {
       try { D[k] = await getJSON(`data/${f}.json`, bust); } catch (e) { console.warn(e); }
     }));
@@ -120,6 +122,9 @@
     const term = D.tt?.term;
     const inTerm = !term || (key >= term.start && key <= term.end);
     if (inTerm) for (const s of timetable().filter((s) => s.day === dow)) evs.push({ time: s.start, title: moduleInfo(s.module).name + (s.type ? ` (${s.type})` : ''), where: s.room, area: 'msc' });
+    const ch = D.income?.challenge;
+    if (ch && key >= ch.start && key <= ch.end) evs.push({ time: ch.main, title: 'AI Income Challenge session', where: `VIP ${ch.vip} · main ${ch.main}`, area: 'income' });
+    for (const ev of S.clubEvents.filter((x) => x.date === key)) evs.push({ time: ev.time || '', title: 'Club event: ' + ev.title, where: [ev.room, ev.stage].filter(Boolean).join(' · '), area: 'club' });
     for (const t of S.tasks.filter((t) => !t.done && t.due === key)) evs.push({ time: '', title: '☐ ' + t.text, area: t.area });
     return evs.sort((a, b) => (a.time || '99').localeCompare(b.time || '99'));
   }
@@ -257,11 +262,67 @@
 
   pages.club = () => {
     const c = D.club || {};
+    const stages = c.stages || [];
+    const evs = S.clubEvents.slice().sort((a, b) => (a.date || '9').localeCompare(b.date || '9'));
+    const upcoming = evs.filter((e) => e.stage !== 'Done'), past = evs.filter((e) => e.stage === 'Done');
+    const evCard = (e) => {
+      const checks = c.checklist || [], done = checks.filter((k) => e.checks?.[k]).length;
+      const n = daysFrom(e.date);
+      const warn = n !== null && n >= 0 && n <= 14 && done < checks.length - 2;
+      return `<div class="row ${warn ? 'p-high' : ''}" data-edit-event="${esc(e.id)}"><div class="row-body">
+        <div class="row-title">${esc(e.title)}</div>
+        <div class="row-sub">${e.date ? esc(fmtDay(e.date)) + (e.time ? ' · ' + esc(e.time) : '') + ' · ' + esc(rel(e.date)) : 'Date TBC'}${e.room ? ' · ' + esc(e.room) : ''}</div>
+        ${e.speaker ? `<div class="row-sub" style="color:var(--text)">${esc(e.speaker)}</div>` : ''}
+        <div class="progress" style="margin:8px 0 4px"><i style="width:${Math.round((done / Math.max(checks.length, 1)) * 100)}%"></i></div>
+        <div class="row-meta"><span class="tag violet">${esc(e.stage)}</span><span>${done}/${checks.length} checklist</span>${warn ? '<span style="color:var(--bad)">behind for its date</span>' : ''}</div></div></div>`;
+    };
+    const pipe = stages.map((st) => `<div class="stat"><b>${evs.filter((e) => e.stage === st).length}</b><span>${esc(st)}</span></div>`).join('');
     return `<div class="hello"><h1>Bayes Real Estate Club</h1><p>${esc(c.role || '')}</p></div>
-      <section class="section" style="margin-top:0"><div class="section-head"><span class="section-title">Club to-dos</span></div>${taskList('club')}</section>
+      <div class="stats" style="grid-template-columns:repeat(${Math.min(stages.length, 5)},minmax(0,1fr))">${pipe}</div>
+      <section class="section"><div class="section-head"><span class="section-title">Upcoming events</span></div>
+        <div class="list">${upcoming.map(evCard).join('') || '<div class="empty">No events planned yet. Add the first one.</div>'}</div>
+        <button class="add-btn" data-add-event>+ Plan an event</button></section>
+      <section class="section"><div class="section-head"><span class="section-title">Club to-dos</span></div>${taskList('club')}</section>
       <section class="section"><div class="section-head"><span class="section-title">Open threads</span></div><div class="list">${(c.threads || []).map((t) => `<div class="row"><div class="row-body"><div class="row-title">${esc(t.who)}</div><div class="row-sub">${esc(t.what)}</div><div class="row-meta"><span class="tag warn">${esc(t.status)}</span><span>${esc(rel(t.date))}</span></div></div><div class="row-actions"><a class="mini" href="${esc(t.link)}" target="_blank" rel="noopener">Open</a></div></div>`).join('') || '<div class="empty">None.</div>'}</div></section>
+      ${past.length ? `<section class="section"><div class="section-head"><span class="section-title">Done</span></div><div class="list">${past.map(evCard).join('')}</div></section>` : ''}
       <section class="section"><div class="section-head"><span class="section-title">Links</span></div><div class="card">${(c.links || []).map((l) => `<div class="kv"><span>${esc(l.label)}</span><a class="section-link" href="${esc(l.url)}" target="_blank" rel="noopener">Open ↗</a></div>`).join('')}</div></section>
       <div class="src-line">${esc(c.note || '')}</div>`;
+  };
+
+  pages.income = () => {
+    const inc = D.income || {}, g = inc.goal || { low: 500, high: 2000, currency: '£' }, ch = inc.challenge;
+    const cur = g.currency || '£';
+    const now = new Date(), mKey = isoDay(now).slice(0, 7);
+    const rev = S.income.revenue.slice().sort((a, b) => b.date.localeCompare(a.date));
+    const month = rev.filter((r) => r.date.startsWith(mKey)).reduce((n, r) => n + (+r.amount || 0), 0);
+    const total = rev.reduce((n, r) => n + (+r.amount || 0), 0);
+    const pct = Math.min(100, Math.round((month / g.low) * 100));
+    let days = '';
+    if (ch) {
+      const s0 = parseDay(ch.start), e0 = parseDay(ch.end);
+      for (let d = new Date(s0), i = 1; d <= e0; d.setDate(d.getDate() + 1), i++) {
+        const k = isoDay(d), note = S.income.notes[k] || '', n = daysFrom(k);
+        days += `<div class="row ${n === 0 ? 'p-medium' : ''}" data-income-note="${k}"><div class="row-body"><div class="row-title">${esc(fmtDay(k))}${n === 0 ? ' · today' : ''}</div>
+          <div class="row-sub">${note ? esc(note) : n !== null && n < 0 ? '<span style="color:var(--dim)">No notes. What was the one takeaway?</span>' : `VIP ${esc(ch.vip)} · main ${esc(ch.main)}`}</div></div>
+          <div class="row-actions"><span class="mini ${note ? '' : 'ghost'}">${note ? '✓ Notes' : 'Add notes'}</span></div></div>`;
+      }
+    }
+    const fitTag = (f) => `<span class="tag ${f === 'high' ? 'good' : 'warn'}">${esc(f)} fit</span>`;
+    const ideaState = (id) => S.income.ideas[id] || 'Idea';
+    return `<div class="hello"><h1>Second revenue stream</h1><p>Target ${cur}${g.low}-${cur}${g.high}/month by end of ${esc(new Date(g.by || '2026-12-31').getFullYear())}.</p></div>
+      <div class="stats" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+        <div class="stat"><b>${cur}${month.toLocaleString('en-GB')}</b><span>This month</span></div>
+        <div class="stat"><b>${pct}%</b><span>of ${cur}${g.low} floor</span></div>
+        <div class="stat"><b>${cur}${total.toLocaleString('en-GB')}</b><span>All time</span></div>
+      </div>
+      <div class="progress" style="margin-top:10px"><i style="width:${pct}%"></i></div>
+      <div class="card" style="margin-top:14px;border-color:rgba(251,191,36,.35)"><div class="row-meta" style="margin:0 0 6px"><span class="tag warn">Straight talk</span></div><div class="row-sub" style="color:var(--text);margin:0">${esc(inc.pushback || '')}</div></div>
+      ${ch ? `<section class="section"><div class="section-head"><span class="section-title">${esc(ch.name)}</span><a class="section-link" href="${esc(ch.inbox)}" target="_blank" rel="noopener">Links ↗</a></div><div class="list">${days}</div><div class="note">${esc(ch.note)}</div></section>` : ''}
+      <section class="section"><div class="section-head"><span class="section-title">Product ideas</span></div><div class="list">${(inc.ideas || []).map((i) => `<div class="row" data-idea="${esc(i.id)}"><div class="row-body"><div class="row-title">${esc(i.title)}</div><div class="row-sub">${esc(i.why)}</div><div class="row-meta">${fitTag(i.fit)}<span>${esc(i.price)}</span><span class="tag accent">${esc(ideaState(i.id))}</span></div></div></div>`).join('')}</div>
+        <div class="note">Tap an idea to move it along: Idea → Validating → Building → Live → Dropped.</div></section>
+      <section class="section"><div class="section-head"><span class="section-title">Revenue log</span></div><div class="card">${rev.slice(0, 12).map((r) => `<div class="kv" data-del-rev="${esc(r.id)}"><span>${esc(fmtShort(r.date))} · ${esc(r.what)}</span><span class="mono">${cur}${(+r.amount).toLocaleString('en-GB')}</span></div>`).join('') || '<div class="empty" style="padding:14px">No sales yet. First £1 is the hardest.</div>'}</div>
+        <button class="add-btn" data-add-rev>+ Log a sale</button></section>
+      <section class="section"><div class="section-head"><span class="section-title">Side-income tasks</span></div>${taskList('income')}</section>`;
   };
 
   const STATUS = ['Networking', 'Applied', 'Recommended', 'Assessment', 'Interview', 'Superday', 'Offer', 'Rejected', 'Withdrawn'];
@@ -287,6 +348,7 @@
           <div class="row-meta">${statusTag(a.status)}<span>Applied ${esc(fmtShort(a.applied))}</span><span>Updated ${esc(rel(a.updated || a.applied) || '-')}</span></div></div>
           ${a.link ? `<div class="row-actions"><a class="mini" href="${esc(a.link)}" target="_blank" rel="noopener" data-stop>Email</a></div>` : ''}</div>`).join('') || '<div class="empty">Nothing here.</div>'}</div>
       <button class="add-btn" data-add-app>+ Log an application</button>
+      <a class="add-btn" style="text-align:center" href="${esc(D.apps?.notion || 'https://app.notion.com/p/9465c8a92106464182112695c99b8b77')}" target="_blank" rel="noopener">Open tracker in Notion ↗</a>
       <div class="src-line">${esc(D.apps?.note || '')}<br>Tap an application to update its status. Edits stay on this device.</div>`;
   };
 
@@ -371,8 +433,38 @@
     isNew ? null : () => { slots.splice(idx, 1); S.slots = slots; persist('slots'); });
   }
 
+  function eventSheet(ev) {
+    const c = D.club || {}, isNew = !ev;
+    ev = ev || { title: '', date: '', time: '18:00', stage: (c.stages || ['Idea'])[0], speaker: '', room: '', checks: {} };
+    openSheet(`<h2 class="sheet-title">${isNew ? 'Plan an event' : 'Edit event'}</h2>
+      <div class="field"><label>Event</label><input name="title" required value="${esc(ev.title)}" placeholder="e.g. Careers in REPE panel"></div>
+      <div class="field-row"><div class="field"><label>Date</label><input type="date" name="date" value="${esc(ev.date)}"></div><div class="field"><label>Time</label><input type="time" name="time" value="${esc(ev.time)}"></div></div>
+      <div class="field-row"><div class="field"><label>Stage</label><select name="stage">${(c.stages || []).map((s) => `<option ${ev.stage === s ? 'selected' : ''}>${esc(s)}</option>`).join('')}</select></div><div class="field"><label>Room</label><input name="room" value="${esc(ev.room)}"></div></div>
+      <div class="field"><label>Speakers / partners</label><input name="speaker" value="${esc(ev.speaker)}"></div>
+      <div class="field"><label>Checklist</label>${(c.checklist || []).map((k, i) => `<label style="display:flex;gap:8px;align-items:center;text-transform:none;letter-spacing:0;font:14px var(--sans);color:var(--text);padding:3px 0"><input type="checkbox" name="ck${i}" ${ev.checks?.[k] ? 'checked' : ''} style="width:auto"> ${esc(k)}</label>`).join('')}</div>`,
+    (v) => {
+      const checks = {}; (c.checklist || []).forEach((k, i) => { if (v['ck' + i]) checks[k] = true; });
+      const data = { title: v.title, date: v.date, time: v.time, stage: v.stage, room: v.room, speaker: v.speaker, checks };
+      if (isNew) S.clubEvents.push({ id: uid(), ...data }); else Object.assign(ev, data);
+      persist('clubEvents');
+    },
+    isNew ? null : () => { S.clubEvents = S.clubEvents.filter((x) => x !== ev); persist('clubEvents'); });
+  }
+  function noteSheet(day) {
+    openSheet(`<h2 class="sheet-title">Challenge notes · ${esc(fmtDay(day))}</h2>
+      <div class="field"><label>Key takeaways / actions</label><textarea name="note" rows="6" placeholder="One idea worth testing, one action for this week">${esc(S.income.notes[day] || '')}</textarea></div>`,
+    (v) => { S.income.notes[day] = v.note.trim(); persist('income'); });
+  }
+  function revSheet() {
+    openSheet(`<h2 class="sheet-title">Log a sale</h2>
+      <div class="field"><label>What sold</label><input name="what" required placeholder="e.g. Waterfall model template"></div>
+      <div class="field-row"><div class="field"><label>Amount (£, net)</label><input name="amount" type="number" step="0.01" required></div><div class="field"><label>Date</label><input type="date" name="date" value="${isoDay(new Date())}"></div></div>`,
+    (v) => { S.income.revenue.push({ id: uid(), ...v }); persist('income'); });
+  }
+  const IDEA_STAGES = ['Idea', 'Validating', 'Building', 'Live', 'Dropped'];
+
   // ------------------------------------------------------------ router
-  const TITLES = { home: 'Today', msc: 'MSc REI', club: 'RE Club', apps: 'Applications', network: 'REPE Network' };
+  const TITLES = { home: 'Today', msc: 'MSc REI', club: 'RE Club', apps: 'Applications', network: 'REPE Network', income: 'Side Income' };
   function route() { const r = (location.hash.replace(/^#\/?/, '') || 'home').split('?')[0]; return pages[r] ? r : 'home'; }
   function render() {
     const r = route();
@@ -384,7 +476,7 @@
 
   // ------------------------------------------------------------ events
   view.addEventListener('click', (e) => {
-    const t = e.target.closest('button, [data-edit-task], [data-edit-app], [data-edit-slot], a[data-reset-cards], a[data-stop]');
+    const t = e.target.closest('button, [data-edit-task], [data-edit-app], [data-edit-slot], [data-edit-event], [data-income-note], [data-idea], [data-del-rev], a[data-reset-cards], a[data-stop]');
     if (!t) { if (e.target.closest('#fc')) { fc.flipped = !fc.flipped; renderCards(); } return; }
     const d = t.dataset;
     if ('stop' in d) return;
@@ -401,6 +493,12 @@
     else if (d.grade) { grade(+d.grade); }
     else if (d.editSlot != null) { slotSheet(+d.editSlot); }
     else if ('addSlot' in d) { slotSheet(null); }
+    else if (d.editEvent) { eventSheet(S.clubEvents.find((x) => x.id === d.editEvent)); }
+    else if ('addEvent' in d) { eventSheet(null); }
+    else if (d.incomeNote) { noteSheet(d.incomeNote); }
+    else if ('addRev' in d) { revSheet(); }
+    else if (d.delRev) { if (confirm('Delete this sale?')) { S.income.revenue = S.income.revenue.filter((r) => r.id !== d.delRev); persist('income'); render(); } }
+    else if (d.idea) { const cur = IDEA_STAGES.indexOf(S.income.ideas[d.idea] || 'Idea'); S.income.ideas[d.idea] = IDEA_STAGES[(cur + 1) % IDEA_STAGES.length]; persist('income'); render(); }
     else if ('resetCards' in d) { e.preventDefault(); if (confirm('Reset flashcard progress?')) { S.cards = {}; persist('cards'); fc.deck = null; renderCards(); } }
   });
   view.addEventListener('input', (e) => {

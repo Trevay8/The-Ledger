@@ -1,6 +1,6 @@
 {
  "generated": "2026-11-07T21:00:00Z",
- "note": "Built from Gmail confirmations and outcomes. Outlook (Bayes inbox) is not connected yet, so anything that only went there is missing.",
+ "note": "Built from Gmail. Internship confirmations mostly go to your Bayes Outlook, which isn't connected yet, so this list is incomplete. Notion's Internship Applications database is the master copy: edit there and Jarvis picks it up on the morning refresh.",
  "items": [
   {
    "id": "eqt-re-si-27",
@@ -137,5 +137,6 @@
    "next": "Auto-invited to the TD Securities event instead.",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1877952786700184976"
   }
- ]
+ ],
+ "notion": "https://app.notion.com/p/9465c8a92106464182112695c99b8b77"
 }

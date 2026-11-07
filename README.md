@@ -44,3 +44,7 @@ Trevay's personal assistant PWA. It lives in `jarvis/`.
 
 ## How data gets in
 `jarvis/data/*.json` is written by Claude from Gmail, Google Calendar, Notion and Drive (and Outlook once connected). Anything you add or edit in the app (tasks, status changes, timetable slots, flashcard progress) is saved on that device only.
+
+**Notion is the master copy** for applications and networking. Edit there and Jarvis picks up the changes on the next morning refresh. A static page can't write to Notion directly, because the browser blocks those calls.
+
+Tabs added since launch: **Income** (side-revenue goal, AI Income Challenge notes, product ideas, revenue log). The **Club** tab now has an event pipeline with a checklist for each event.
