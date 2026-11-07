@@ -1,0 +1,50 @@
+{
+  "generated": "2026-11-07T21:00:00Z",
+  "sources": ["Gmail", "Google Calendar", "Notion (REPE Network Tracker)", "Google Drive"],
+  "pending_sources": ["Outlook (Bayes inbox) - not connected yet"],
+  "urgent": [
+    {
+      "id": "u-bx-rsvp",
+      "title": "RSVP to Damon Wilson's invite (Blackstone)",
+      "detail": "Catch-up on Tue 17 Nov, 17:00 at Berkeley Square House. The invite still shows 'needs action' on both your Gmail and Bayes calendars. Accept it so it doesn't look like you've gone quiet.",
+      "area": "network",
+      "due": "2026-11-10",
+      "priority": "high",
+      "link": "https://calendar.google.com/calendar/r/week/2026/11/17"
+    },
+    {
+      "id": "u-jay",
+      "title": "Lock in the Jay Odedra (EQT) Zoom",
+      "detail": "Jay offered Wednesday late afternoon. You proposed 15:00-15:30 on Wed 11 Nov and haven't had a confirmation yet. If nothing by Monday lunchtime, nudge him and send a calendar invite. Prep: his CBRE IM Eagles to EQT route, and the EQT internship you've just been recommended for.",
+      "area": "network",
+      "due": "2026-11-09",
+      "priority": "high",
+      "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-a:r4328543339374741879"
+    },
+    {
+      "id": "u-eqt",
+      "title": "Start EQT Superday prep now",
+      "detail": "SEO London formally recommended you for the EQT 2027 Real Estate Summer Internship (6 Nov). Applications close 12 Nov, Superday is 26 Nov, so invites land between those dates. Prep the case study, EQT Real Estate's logistics and living strategies, and the Flemingsberg Phase 2 story from the masterclass. Tell SEO the moment you get an invite.",
+      "area": "apps",
+      "due": "2026-11-12",
+      "priority": "high",
+      "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881112459316162429"
+    },
+    {
+      "id": "u-evercore",
+      "title": "Check your Evercore Private Funds Group status",
+      "detail": "You had a video interview invite (deadline 6 Sep) and a reminder on 3 Sep that it wasn't done. There's been nothing since. Log into the portal and confirm whether it's still live or closed, then update the tracker.",
+      "area": "apps",
+      "due": "2026-11-13",
+      "priority": "medium",
+      "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1875108027848207162"
+    }
+  ],
+  "events": [
+    { "date": "2026-11-11T15:00:00", "end": "2026-11-11T15:30:00", "title": "Zoom: Jay Odedra, EQT", "where": "Zoom (time proposed, not yet confirmed)", "area": "network", "tentative": true },
+    { "date": "2026-11-12", "title": "EQT 2027 RE Summer Internship applications close", "where": "Superday invites could arrive from today", "area": "apps", "allDay": true },
+    { "date": "2026-11-17T17:00:00", "end": "2026-11-17T17:30:00", "title": "Catch-up: Damon Wilson, Blackstone", "where": "Berkeley Square House, 4-19 Berkeley Square, W1J 6BD (Crystal Palace room, 3rd floor)", "area": "network" },
+    { "date": "2026-11-18T18:30:00", "end": "2026-11-18T19:30:00", "title": "Haircut, Huss Cutz", "where": "145 Hastings Road, Bromley", "area": "life" },
+    { "date": "2026-11-26", "title": "EQT Real Estate Superday (if invited)", "where": "EQT London office", "area": "apps", "allDay": true }
+  ]
+}

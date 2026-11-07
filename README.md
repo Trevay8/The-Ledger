@@ -26,3 +26,21 @@ Edit the files on github.com and commit. The site redeploys automatically. To fo
 ## Install on your phone
 - **iPhone:** open the link in Safari → Share → *Add to Home Screen*
 - **Android:** open in Chrome → ⋮ → *Install app*
+
+---
+
+# Jarvis
+
+Trevay's personal assistant PWA. It lives in `jarvis/`.
+
+**Live (once merged to main):** https://trevay8.github.io/The-Ledger/jarvis/
+
+## Tabs
+- **Home**: what's urgent, the next 7 days, further-out events, and your tasks
+- **MSc REI**: today's lectures, the week timetable, and a flashcard tutor with spaced repetition, built from your lecture notes
+- **RE Club**: Bayes Real Estate Club to-dos and open threads
+- **Applications**: internship and graduate application tracker
+- **Network**: REPE outreach action list (book a call, follow-up due, close out), built from the Notion REPE Network Tracker
+
+## How data gets in
+`jarvis/data/*.json` is written by Claude from Gmail, Google Calendar, Notion and Drive (and Outlook once connected). Anything you add or edit in the app (tasks, status changes, timetable slots, flashcard progress) is saved on that device only.

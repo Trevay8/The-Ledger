@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Jarvis</title>
+  <meta name="description" content="Trevay's personal assistant: week ahead, MSc tutor, club, applications and REPE network.">
+  <meta name="theme-color" content="#06090f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Jarvis">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/jarvis.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="#/" class="brand" aria-label="Jarvis home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">JARVIS</span>
+    </a>
+    <span class="page-name" id="pageName"></span>
+    <button class="icon-btn" id="refreshBtn" aria-label="Refresh data">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+    </button>
+    <!-- Opens the Claude Code session that builds Jarvis. If it stops working, swap for https://claude.ai/code -->
+    <a class="icon-btn claude-btn" href="https://claude.ai/code/session_0135UieqFu5bMEMh7FNYpnpR" target="_blank" rel="noopener" aria-label="Ask Claude to change Jarvis" title="Edit with Claude">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><g stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 3v18"/><path d="M3 12h18"/><path d="M5.6 5.6l12.8 12.8"/><path d="M18.4 5.6L5.6 18.4"/></g></svg>
+    </a>
+  </header>
+
+  <main id="view" tabindex="-1"></main>
+
+  <nav class="tabbar" aria-label="Sections">
+    <a href="#/" data-route="home"><span class="ti">◉</span><span>Home</span></a>
+    <a href="#/msc" data-route="msc"><span class="ti">∑</span><span>MSc REI</span></a>
+    <a href="#/club" data-route="club"><span class="ti">◆</span><span>RE Club</span></a>
+    <a href="#/apps" data-route="apps"><span class="ti">▤</span><span>Applications</span></a>
+    <a href="#/network" data-route="network"><span class="ti">⌘</span><span>Network</span></a>
+  </nav>
+
+  <dialog id="sheet"></dialog>
+  <script src="js/jarvis.js" defer></script>
+</body>
+</html>
