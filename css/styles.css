@@ -199,3 +199,10 @@ main { max-width: 760px; margin: 0 auto; padding: 14px 16px 48px; outline: none;
 .toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--surface-2); border: 1px solid var(--line-2); padding: 10px 14px; border-radius: 10px; font-size: 13px; z-index: 50; }
 .claude-btn { color: #d97757; background: rgba(217, 119, 87, 0.12); width: 36px; height: 36px; margin-left: 2px; }
 .claude-btn:active { background: rgba(217, 119, 87, 0.25); }
+
+.drawer-label { font: 600 10px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); padding: 16px 12px 6px; }
+.kind-Report { background: rgba(156, 196, 255, 0.14); color: var(--blue-soft); border-color: transparent; }
+.kind-Deal { background: rgba(47, 208, 122, 0.12); color: var(--up); border-color: transparent; }
+.kind-Insight { background: rgba(242, 184, 75, 0.14); color: var(--amber); border-color: transparent; }
+.kind-Update { background: rgba(244, 247, 251, 0.08); color: var(--text); border-color: transparent; }
+.sector-intro { color: var(--muted); font-size: 13.5px; margin: 0 0 14px; }

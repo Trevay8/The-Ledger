@@ -175,7 +175,7 @@
   // ------------------------------------------------------------ pages
   const allItems = () => {
     const n = state.news || {};
-    return [...(n.markets || []), ...(n.reports || []), ...(n.deals || [])];
+    return [...(n.markets || []), ...(n.reports || []), ...(n.deals || []), ...(n.resi || []), ...(n.logi || [])];
   };
   const metric = (id) => state.metrics?.metrics?.find((m) => m.id === id);
 
@@ -324,6 +324,67 @@
       <div class="note">Deals are auto-detected from headlines, so sector/type tags can be wrong. Values are as reported; the total converts € to £ at the live ECB rate.</div>`;
   }
 
+  const SECTOR_META = {
+    resi: { title: 'European Residential', yields: 'Living', intro: 'BTR, multifamily, PBSA, co-living and senior living across the UK and continental Europe: market updates, research, deals and commentary.' },
+    logi: { title: 'European Logistics', yields: 'Logistics', intro: 'Big box, last-mile and multi-let industrial across the UK and Europe: take-up, rents, development, research and deals.' },
+  };
+
+  function sectorItemHtml(it) {
+    const read = readSet.has(it.id);
+    const amt = it.deal?.amount?.label || (it.title.match(/[£€$]\s?\d+(?:[.,]\d+)?\s?(?:bn|m)\b/i) || [])[0];
+    return `<article class="item${read ? ' read' : ''}" data-id="${esc(it.id)}">
+      <div class="item-body">
+        <div class="item-meta"><span class="tag kind-${esc(it.kind)}">${esc(it.kind)}</span><span class="tag">${esc(it.country || 'Europe')}</span>${amt ? `<span class="tag white">${esc(amt)}</span>` : ''}</div>
+        <a class="item-title" href="${esc(it.link)}" target="_blank" rel="noopener" data-open="${esc(it.id)}">${esc(it.title)}</a>
+        ${it.summary ? `<div class="item-sum">${esc(it.summary)}</div>` : ''}
+        <div class="item-meta" style="margin:6px 0 0"><span class="src">${esc(it.source)}</span>${it.sub ? '<span class="star">★</span>' : ''}${it.paywall ? '<span class="lock">🔒︎</span>' : ''}<span>· ${ago(it.date)}</span>${it.also?.length ? `<span class="also">+${it.also.length} more</span>` : ''}</div>
+      </div>
+      <button class="save-btn${saved.has(it.id) ? ' on' : ''}" data-save="${esc(it.id)}" aria-label="Save">${saved.has(it.id) ? '★' : '☆'}</button>
+    </article>`;
+  }
+
+  function sectorYields(sectorName) {
+    const y = state.yields;
+    if (!y) return '';
+    const rows = y.markets.filter((r) => r.sector === sectorName);
+    if (!rows.length) return '';
+    const g = metric('gilt10'), b = metric('bund10');
+    const body = rows.map((r) => {
+      const bench = r.region === 'UK' ? g : b;
+      const gap = bench?.value != null ? Math.round((r.yield - bench.value) * 100) : null;
+      const qoq = r.prev != null ? Math.round((r.yield - r.prev) * 100) : null;
+      return `<tr><td>${esc(r.market)} <span class="asof" style="display:inline">${r.region === 'UK' ? 'UK' : ''}</span>${r.conf === 'est' ? '<span class="est">EST</span>' : ''}</td><td class="y">${r.yield.toFixed(2)}%</td><td>${qoq == null ? '<span class="gap">—</span>' : `<span class="chg ${qoq > 0 ? 'up' : qoq < 0 ? 'down' : 'flat'}">${qoq > 0 ? '+' : ''}${qoq}</span>`}</td><td class="gap">${gap == null ? '—' : (gap > 0 ? '+' : '') + gap}</td></tr>`;
+    }).join('');
+    return `<section class="section"><div class="section-head"><h2 class="section-title">Prime ${esc(sectorName)} Yields</h2></div>
+      <div class="card"><table class="ytable"><thead><tr><th>Market</th><th>Yield</th><th>QoQ</th><th>vs 10Y</th></tr></thead><tbody>${body}</tbody></table>
+      <div class="note">Spread vs 10Y gilt (UK) or 10Y Bund (Europe), in bps. EST = estimate, so verify before quoting.</div></div></section>`;
+  }
+
+  function renderSector(key) {
+    const meta = SECTOR_META[key];
+    const n = state.news;
+    const items = n?.[key] || [];
+    const kf = ui[key + 'Kind'] || 'all';
+    const cf = ui[key + 'Country'] || 'all';
+    const filt = items.filter((x) => (kf === 'all' || x.kind === kf) && (cf === 'all' || (cf === 'Continental' ? x.country !== 'UK' : x.country === cf)));
+    const kinds = ['Update', 'Report', 'Deal', 'Insight'];
+    const label = { Update: 'Market updates', Report: 'Reports & research', Deal: 'Deals', Insight: 'Insight & blogs' };
+    const countries = Object.entries(items.reduce((a, x) => ((a[x.country] = (a[x.country] || 0) + 1), a), {}))
+      .filter(([c]) => c !== 'UK' && c !== 'Europe').sort((a, b) => b[1] - a[1]).slice(0, 6);
+    const limKey = key + 'Limit';
+    let html = `<p class="sector-intro">${esc(meta.intro)}</p>`;
+    html += chips(key + 'Kind', [['all', 'All', items.length], ...kinds.map((k) => [k, label[k], items.filter((x) => x.kind === k).length])], kf);
+    html += chips(key + 'Country', [['all', 'All regions'], ['UK', 'UK', items.filter((x) => x.country === 'UK').length], ['Continental', 'Continental', items.filter((x) => x.country !== 'UK').length], ...countries.map(([c, k]) => [c, c, k])], cf);
+    if (!n) html += '<div class="skeleton"></div>';
+    else html += `<div class="list">${filt.length ? groupedByDay(filt.slice(0, ui[limKey] || 50), sectorItemHtml) : emptyState('Nothing yet', 'This page fills on the next data refresh (every 3 hours).')}</div>
+      ${filt.length > (ui[limKey] || 50) ? `<button class="more-btn" data-more="${limKey}">Show more (${filt.length - (ui[limKey] || 50)})</button>` : ''}`;
+    html += sectorYields(meta.yields);
+    const lib = state.library?.sectors?.[key];
+    if (lib) html += `<section class="section"><div class="section-head"><h2 class="section-title">Key research to follow</h2></div>
+      <div class="lib">${lib.map((i) => `<a href="${esc(i.url)}" target="_blank" rel="noopener"><b>${esc(i.name)}</b><span>${esc(i.tip)}</span></a>`).join('')}</div></section>`;
+    view.innerHTML = html;
+  }
+
   function renderSaved() {
     const items = [...saved.values()].sort((a, b) => Date.parse(b.savedAt || b.date) - Date.parse(a.savedAt || a.date));
     view.innerHTML = `<section class="section"><div class="section-head"><h2 class="section-title">Saved for later</h2><span class="asof">${items.length} items</span></div>
@@ -344,7 +405,7 @@
   // ------------------------------------------------------------ router
   const ROUTES = {
     home: ['', renderHome], markets: ['Market Updates', renderMarkets], reports: ['Quarterly Reports', renderReports],
-    deals: ['Recent Deals', renderDeals], saved: ['Saved', renderSaved], sources: ['Sources', renderSources],
+    deals: ['Recent Deals', renderDeals], resi: ['European Residential', () => renderSector('resi')], logi: ['European Logistics', () => renderSector('logi')], saved: ['Saved', renderSaved], sources: ['Sources', renderSources],
   };
   let current = 'home';
   function route() {
@@ -387,7 +448,7 @@
   view.addEventListener('click', (e) => {
     const t = e.target;
     const chip = t.closest('[data-chip]');
-    if (chip) { ui[chip.dataset.chip] = chip.dataset.val; ['mLimit', 'rLimit', 'dLimit'].forEach((k) => delete ui[k]); persistUi(); return rerender(); }
+    if (chip) { ui[chip.dataset.chip] = chip.dataset.val; ['mLimit', 'rLimit', 'dLimit', 'resiLimit', 'logiLimit'].forEach((k) => delete ui[k]); persistUi(); return rerender(); }
     const yr = t.closest('[data-yregion]');
     if (yr) { ui.yRegion = yr.dataset.yregion; persistUi(); return rerender(); }
     const dr = t.closest('[data-dregion]');
@@ -395,7 +456,7 @@
     const ds = t.closest('[data-dsort]');
     if (ds) { ui.dSort = ds.dataset.dsort; persistUi(); return rerender(); }
     const more = t.closest('[data-more]');
-    if (more) { ui[more.dataset.more] = (ui[more.dataset.more] || 60) + 60; return rerender(); }
+    if (more) { ui[more.dataset.more] = (ui[more.dataset.more] || 50) + 50; return rerender(); }
     const sv = t.closest('[data-save]');
     if (sv) {
       const id = sv.dataset.save;

@@ -4,48 +4,234 @@
       "id": "brokers",
       "label": "Brokers",
       "items": [
-        { "name": "CBRE", "url": "https://www.cbre.co.uk/insights", "tip": "UK Market Outlook, Prime Yields monthly, EMEA Investment Figures" },
-        { "name": "JLL", "url": "https://www.jll.co.uk/en/trends-and-insights/research", "tip": "UK Investment Market, European Capital Markets" },
-        { "name": "Savills", "url": "https://www.savills.co.uk/research_articles/", "tip": "Market in Minutes, Spotlight: European office investment" },
-        { "name": "Knight Frank", "url": "https://www.knightfrank.co.uk/research", "tip": "Prime Yield Guide (monthly), Logistics dashboard" },
-        { "name": "Cushman & Wakefield", "url": "https://www.cushmanwakefield.com/en/united-kingdom/insights", "tip": "DNA of Real Estate (quarterly), MarketBeats" },
-        { "name": "Colliers", "url": "https://www.colliers.com/en-gb/research", "tip": "UK Property Snapshot (monthly)" }
+        {
+          "name": "CBRE",
+          "url": "https://www.cbre.co.uk/insights",
+          "tip": "UK Market Outlook, Prime Yields monthly, EMEA Investment Figures"
+        },
+        {
+          "name": "JLL",
+          "url": "https://www.jll.co.uk/en/trends-and-insights/research",
+          "tip": "UK Investment Market, European Capital Markets"
+        },
+        {
+          "name": "Savills",
+          "url": "https://www.savills.co.uk/research_articles/",
+          "tip": "Market in Minutes, Spotlight: European office investment"
+        },
+        {
+          "name": "Knight Frank",
+          "url": "https://www.knightfrank.co.uk/research",
+          "tip": "Prime Yield Guide (monthly), Logistics dashboard"
+        },
+        {
+          "name": "Cushman & Wakefield",
+          "url": "https://www.cushmanwakefield.com/en/united-kingdom/insights",
+          "tip": "DNA of Real Estate (quarterly), MarketBeats"
+        },
+        {
+          "name": "Colliers",
+          "url": "https://www.colliers.com/en-gb/research",
+          "tip": "UK Property Snapshot (monthly)"
+        }
       ]
     },
     {
       "id": "data",
       "label": "Data & Industry",
       "items": [
-        { "name": "MSCI", "url": "https://www.msci.com/our-solutions/real-assets", "tip": "UK Monthly / Quarterly Property Index" },
-        { "name": "INREV", "url": "https://www.inrev.org/library", "tip": "Quarterly Fund Index, Investment Intentions Survey" },
-        { "name": "BPF", "url": "https://bpf.org.uk/our-work/research-and-briefings/", "tip": "Property Data Report, policy briefings" },
-        { "name": "RICS", "url": "https://www.rics.org/news-insights/market-surveys", "tip": "UK Commercial Property Monitor (quarterly)" },
-        { "name": "Green Street", "url": "https://www.greenstreet.com/insights", "tip": "Pan-European CPPI, sector reports (subscribed)" },
-        { "name": "Bayes CRE Lending Report", "url": "https://www.bayes.city.ac.uk/faculties-and-research/centres/real-estate-research", "tip": "Half-yearly UK CRE lending survey. Your future school, so know it." }
+        {
+          "name": "MSCI",
+          "url": "https://www.msci.com/our-solutions/real-assets",
+          "tip": "UK Monthly / Quarterly Property Index"
+        },
+        {
+          "name": "INREV",
+          "url": "https://www.inrev.org/library",
+          "tip": "Quarterly Fund Index, Investment Intentions Survey"
+        },
+        {
+          "name": "BPF",
+          "url": "https://bpf.org.uk/our-work/research-and-briefings/",
+          "tip": "Property Data Report, policy briefings"
+        },
+        {
+          "name": "RICS",
+          "url": "https://www.rics.org/news-insights/market-surveys",
+          "tip": "UK Commercial Property Monitor (quarterly)"
+        },
+        {
+          "name": "Green Street",
+          "url": "https://www.greenstreet.com/insights",
+          "tip": "Pan-European CPPI, sector reports (subscribed)"
+        },
+        {
+          "name": "Bayes CRE Lending Report",
+          "url": "https://www.bayes.city.ac.uk/faculties-and-research/centres/real-estate-research",
+          "tip": "Half-yearly UK CRE lending survey. Your future school, so know it."
+        }
       ]
     },
     {
       "id": "managers",
       "label": "Fund Managers",
       "items": [
-        { "name": "CBRE IM", "url": "https://www.cbreim.com/insights", "tip": "Global Outlook, House View. Read before you start." },
-        { "name": "Nuveen", "url": "https://www.nuveen.com/en-gb/insights/real-estate", "tip": "European real estate outlook" },
-        { "name": "PGIM Real Estate", "url": "https://www.pgim.com/real-estate/insights", "tip": "Quarterly European outlook" },
-        { "name": "M&G Real Estate", "url": "https://www.mandg.com/investments/professional-investor/en-gb/insights", "tip": "Real estate outlook" },
-        { "name": "Blackstone", "url": "https://www.blackstone.com/insights/", "tip": "Market commentary, letters" },
-        { "name": "AEW", "url": "https://www.aew.com/research", "tip": "European Outlook. Strong on pricing/fair value." },
-        { "name": "LaSalle", "url": "https://www.lasalle.com/research-and-insights/", "tip": "ISA Outlook (annual + mid-year)" }
+        {
+          "name": "CBRE IM",
+          "url": "https://www.cbreim.com/insights",
+          "tip": "Global Outlook, House View. Read before you start."
+        },
+        {
+          "name": "Nuveen",
+          "url": "https://www.nuveen.com/en-gb/insights/real-estate",
+          "tip": "European real estate outlook"
+        },
+        {
+          "name": "PGIM Real Estate",
+          "url": "https://www.pgim.com/real-estate/insights",
+          "tip": "Quarterly European outlook"
+        },
+        {
+          "name": "M&G Real Estate",
+          "url": "https://www.mandg.com/investments/professional-investor/en-gb/insights",
+          "tip": "Real estate outlook"
+        },
+        {
+          "name": "Blackstone",
+          "url": "https://www.blackstone.com/insights/",
+          "tip": "Market commentary, letters"
+        },
+        {
+          "name": "AEW",
+          "url": "https://www.aew.com/research",
+          "tip": "European Outlook. Strong on pricing/fair value."
+        },
+        {
+          "name": "LaSalle",
+          "url": "https://www.lasalle.com/research-and-insights/",
+          "tip": "ISA Outlook (annual + mid-year)"
+        }
       ]
     }
   ],
   "calendar": [
-    { "what": "BoE MPC decision + Monetary Policy Report", "when": "Feb · May · Aug · Nov (MPR); 8 meetings/yr" },
-    { "what": "ECB monetary policy meeting", "when": "Every ~6 weeks" },
-    { "what": "UK CPI (ONS)", "when": "Monthly, ~3rd Wednesday" },
-    { "what": "RICS UK Commercial Property Monitor", "when": "Quarterly (Jan · Apr · Jul · Oct)" },
-    { "what": "MSCI UK Quarterly Property Index", "when": "Quarterly" },
-    { "what": "Knight Frank / CBRE prime yield sheets", "when": "Monthly" },
-    { "what": "Bayes CRE Lending Report", "when": "Half-yearly (May · Nov)" },
-    { "what": "REIT results (BL, Landsec, SEGRO, Unite)", "when": "Half-year & full-year" }
-  ]
+    {
+      "what": "BoE MPC decision + Monetary Policy Report",
+      "when": "Feb · May · Aug · Nov (MPR); 8 meetings/yr"
+    },
+    {
+      "what": "ECB monetary policy meeting",
+      "when": "Every ~6 weeks"
+    },
+    {
+      "what": "UK CPI (ONS)",
+      "when": "Monthly, ~3rd Wednesday"
+    },
+    {
+      "what": "RICS UK Commercial Property Monitor",
+      "when": "Quarterly (Jan · Apr · Jul · Oct)"
+    },
+    {
+      "what": "MSCI UK Quarterly Property Index",
+      "when": "Quarterly"
+    },
+    {
+      "what": "Knight Frank / CBRE prime yield sheets",
+      "when": "Monthly"
+    },
+    {
+      "what": "Bayes CRE Lending Report",
+      "when": "Half-yearly (May · Nov)"
+    },
+    {
+      "what": "REIT results (BL, Landsec, SEGRO, Unite)",
+      "when": "Half-year & full-year"
+    }
+  ],
+  "sectors": {
+    "resi": [
+      {
+        "name": "Savills: European Residential",
+        "url": "https://www.savills.co.uk/research_articles/",
+        "tip": "European Residential / Living Spotlights, UK BTR market updates"
+      },
+      {
+        "name": "BPF × Savills BTR report",
+        "url": "https://bpf.org.uk/our-work/research-and-briefings/",
+        "tip": "Quarterly UK build-to-rent pipeline and investment"
+      },
+      {
+        "name": "Knight Frank: Living",
+        "url": "https://www.knightfrank.co.uk/research",
+        "tip": "UK Living Sectors, Student Property, Multihousing reports"
+      },
+      {
+        "name": "CBRE: European Living",
+        "url": "https://www.cbre.co.uk/insights",
+        "tip": "European Living investment figures, Residential outlooks"
+      },
+      {
+        "name": "JLL: Living",
+        "url": "https://www.jll.co.uk/en/trends-and-insights/research",
+        "tip": "UK Residential Forecasts, PBSA report"
+      },
+      {
+        "name": "Cushman & Wakefield: Living",
+        "url": "https://www.cushmanwakefield.com/en/united-kingdom/insights",
+        "tip": "European Living Capital Markets"
+      },
+      {
+        "name": "Catella Research",
+        "url": "https://www.catella.com/en/research",
+        "tip": "Strong continental resi data (Germany, Nordics)"
+      },
+      {
+        "name": "Greystar",
+        "url": "https://www.greystar.com/",
+        "tip": "Global BTR/PBSA owner-operator. Track its European moves."
+      }
+    ],
+    "logi": [
+      {
+        "name": "Savills: Big Shed Briefing",
+        "url": "https://www.savills.co.uk/research_articles/",
+        "tip": "Monthly UK logistics take-up, supply and rents"
+      },
+      {
+        "name": "Prologis Research",
+        "url": "https://www.prologis.com/insights-news/research",
+        "tip": "European logistics rent index, supply chain outlook"
+      },
+      {
+        "name": "Knight Frank: Logistics",
+        "url": "https://www.knightfrank.co.uk/research",
+        "tip": "UK Logistics Dashboard (monthly), European Logistics Outlook"
+      },
+      {
+        "name": "CBRE: Industrial & Logistics",
+        "url": "https://www.cbre.co.uk/insights",
+        "tip": "EMEA Industrial & Logistics figures"
+      },
+      {
+        "name": "JLL: Industrial",
+        "url": "https://www.jll.co.uk/en/trends-and-insights/research",
+        "tip": "European Logistics & Industrial outlook"
+      },
+      {
+        "name": "Cushman & Wakefield",
+        "url": "https://www.cushmanwakefield.com/en/united-kingdom/insights",
+        "tip": "European Logistics MarketBeat"
+      },
+      {
+        "name": "Colliers",
+        "url": "https://www.colliers.com/en-gb/research",
+        "tip": "UK Industrial & Logistics snapshots"
+      },
+      {
+        "name": "SEGRO / Tritax results",
+        "url": "https://www.segro.com/investors",
+        "tip": "Read results: rental growth, ERV, dev pipeline"
+      }
+    ]
+  }
 }

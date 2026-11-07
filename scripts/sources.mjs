@@ -79,4 +79,25 @@ export const SOURCES = [
     ['d-funds', '("final close" OR "first close" OR "raises" OR fundraise) real estate fund (Europe OR UK OR European) when:21d'],
     ['d-jv', '"real estate" "joint venture" (UK OR Europe OR European) when:14d'],
   ].map(([id, q]) => ({ id, name: 'Google News', kind: 'gnews', url: gnews(q), section: 'deals', cat: 're', weight: 1 })),
+
+  // ---------- SECTOR PAGES: European Residential ----------
+  ...[
+    ['s-resi-btr', '("build-to-rent" OR BTR OR multifamily OR "private rented sector" OR PRS OR "rental housing") (UK OR Europe OR European OR Germany OR Spain OR Netherlands OR Ireland OR Nordic OR France) when:21d', null],
+    ['s-resi-pbsa', '(PBSA OR "student accommodation" OR "student housing" OR "co-living" OR "senior living" OR "later living") (UK OR Europe OR European OR Spain OR Germany OR Netherlands OR Ireland OR Italy) when:21d', null],
+    ['s-resi-inv', '"residential" (investment OR investors OR portfolio OR "living sector") (Europe OR European OR UK OR Germany) real estate when:21d', null],
+    ['s-resi-listed', '(Vonovia OR "LEG Immobilien" OR Heimstaden OR Grainger OR "Unite Students" OR "Unite Group" OR Empiric OR Aroundtown OR "TAG Immobilien" OR "Get Living" OR Quintain) when:21d', null],
+    ['s-resi-pbsanews', 'site:pbsanews.co.uk when:30d', 'PBSA News'],
+    ['s-resi-btrnews', 'site:btrnews.co.uk when:30d', 'BTR News'],
+    ['s-resi-research', '(Savills OR CBRE OR JLL OR "Knight Frank" OR "Cushman & Wakefield" OR Colliers OR Catella OR PGIM OR Nuveen OR Patrizia OR "BNP Paribas Real Estate" OR BPF) (residential OR "living sector" OR PBSA OR "build-to-rent" OR multifamily OR "student accommodation") (report OR research OR outlook OR survey OR index OR forecast) when:60d', null, 'report'],
+    ['s-resi-rents', '(rents OR "rental growth" OR "house prices") (Europe OR UK OR Germany OR Spain OR Netherlands OR Ireland) (index OR data OR report) when:14d', null, 'report'],
+  ].map(([id, q, name, hint]) => ({ id, name: name || 'Google News', kind: 'gnews', url: gnews(q), section: 'sector', sector: 'resi', hint, cat: 're', weight: 1 })),
+
+  // ---------- SECTOR PAGES: European Logistics ----------
+  ...[
+    ['s-logi-market', '(logistics OR warehouse OR "industrial property" OR "big box" OR "last-mile" OR "urban logistics") (rents OR "take-up" OR vacancy OR investment OR yields OR occupier OR development) (Europe OR European OR UK OR Germany OR Poland OR Netherlands OR Spain OR France OR Italy) when:21d', null],
+    ['s-logi-players', '(Prologis OR SEGRO OR Tritax OR VGP OR Montea OR CTP OR Panattoni OR "GLP Europe" OR "P3 Logistic Parks" OR Logicor OR Mileway OR WDP OR "Urban Logistics REIT" OR LondonMetric OR Catena OR Sagax) when:21d', null],
+    ['s-logi-deals', '(acquires OR buys OR sells OR "forward funding" OR "joint venture" OR develops OR "pre-let") (logistics OR warehouse OR "industrial estate" OR "distribution centre" OR "logistics park") (UK OR Europe OR Germany OR Netherlands OR Spain OR France OR Poland OR Italy) when:21d', null],
+    ['s-logi-research', '(Savills OR CBRE OR JLL OR "Knight Frank" OR "Cushman & Wakefield" OR Colliers OR "Gerald Eve" OR "Avison Young" OR "BNP Paribas Real Estate" OR Prologis OR "Lambert Smith Hampton") (logistics OR industrial OR warehouse OR "big shed") (report OR research OR outlook OR survey OR "take-up" OR index OR forecast) when:60d', null, 'report'],
+    ['s-logi-ipe', 'site:realassets.ipe.com (logistics OR industrial OR warehouse) when:60d', 'IPE Real Assets'],
+  ].map(([id, q, name, hint]) => ({ id, name: name || 'Google News', kind: 'gnews', url: gnews(q), section: 'sector', sector: 'logi', hint, cat: 're', weight: 1 })),
 ];

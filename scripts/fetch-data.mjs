@@ -103,6 +103,36 @@ const MACRO_RX = /\b(inflation|CPI|interest rates?|rates? (cut|rise|hike|decisio
 const LIFESTYLE_RX = /\b(House ?& ?Home|getaways?|holiday|interiors?|gardens?|garden design|recipes?|wine|travel|style|fashion|crossword|Special$|podcast|quiz|horoscope|celebrity|premiere|football|cricket|Strictly|odd jobs|dream home|property of the week|homes for sale|on the market:|what you can buy)\b/i;
 const JUNK_RX = /(^home\b|forum:|conference:|summit:|awards?:|stock price|latest news\b|^my |^sign in|^subscribe|quote of|\$[A-Z]{2,5}\b|shares of|earnings call|\(NYSE|\(NASDAQ|\.N\)|webinar|^events?\b|job vacanc|careers)/i;
 const NON_EU_RX = /\b(U\.S\.|US|USA|American|New York|NYC|Manhattan|Brooklyn|Texas|Houston|Austin|California|Los Angeles|San Francisco|Florida|Miami|Chicago|Atlanta|Dallas|Denver|Boston|Seattle|Phoenix|Washington|D\.C\.|Philadelphia|Nashville|Charlotte|Las Vegas|Canada|Toronto|Montreal|Vancouver|Mexico|China|Chinese|Hong Kong|Japan|Tokyo|Singapore|Korea|Seoul|Australia|Sydney|Melbourne|India|Indian|Delhi|NCR|Mumbai|Bengaluru|Bangalore|Hyderabad|Chennai|Pune|APAC|Asia|Asian|Dubai|UAE|Saudi|Riyadh|Qatar|Africa|Nigeria|Nigerian|Lagos|Brazil|Paraguay|Argentina)\b/;
+const RESI_RX = /\b(residential|build[- ]to[- ]rent|BTR|multi-?family|PBSA|student (accommodation|housing|beds?|homes)|co[- ]living|senior living|later living|retirement (homes|living|communities)|single[- ]family|SFH|rental (homes|housing|market|growth|sector)|apartments?|flats|housing|homes|landlords?|tenants?|rents?|private rented|PRS|affordable housing|social housing|house prices|housebuild\w*|Vonovia|LEG Immobilien|Heimstaden|Grainger|Unite (Students|Group)|Empiric|Quintain|Greystar|Get Living|Aroundtown|TAG Immobilien|Adler Group)\b/i;
+const LOGI_RX = /\b(logistics|warehous\w*|industrial (property|properties|real estate|estates?|parks?|space|market|units?|portfolio|assets?|sector|occupiers?|take-up|rents?|vacancy|investment)|big[- ]box|big shed|last[- ]mile|urban logistics|multi[- ]let|distribution (cent\w+|hubs?|parks?|warehouses?)|cold storage|Prologis|SEGRO|Tritax|VGP|Montea|CTP|Panattoni|GLP|P3 Logistic\w*|Logicor|Mileway|WDP|Warehouses De Pauw|Urban Logistics REIT|LondonMetric|Catena|Sagax|Industrials REIT)\b/i;
+const LOGI_CONTEXT_RX = /\b(property|properties|real estate|rents?|rental|take-up|vacancy|yields?|invest\w*|acquir\w*|buys?|sells?|sold|develop\w*|leas(e|es|ed|ing)|lets?|pre-let|sq ft|sq m|m²|square (feet|metres)|portfolio|REIT|parks?|scheme|occupiers?|warehous\w*|space|site|fund\w*|capital|Prologis|SEGRO|Tritax|VGP|Montea|CTP|Panattoni|GLP|Logicor|Mileway|WDP|LondonMetric)\b/i;
+const NAMED_PLAYER_RX = /\b(Vonovia|LEG Immobilien|Heimstaden|Grainger|Unite|Empiric|Aroundtown|TAG Immobilien|Get Living|Quintain|Prologis|SEGRO|Tritax|VGP|Montea|CTP|Panattoni|GLP|P3|Logicor|Mileway|WDP|LondonMetric|Catena|Sagax)\b/;
+
+const COUNTRIES = [
+  ['UK', UK_RX],
+  ['Germany', /\b(German\w*|Berlin|Munich|Frankfurt|Hamburg|Düsseldorf|Cologne|Stuttgart|Leipzig|Vonovia|LEG Immobilien|TAG Immobilien|Aroundtown)\b/],
+  ['France', /\b(France|French|Paris|Lyon|Marseille|Lille)\b/],
+  ['Spain', /\b(Spain|Spanish|Madrid|Barcelona|Valencia|Seville|Malaga)\b/],
+  ['Netherlands', /\b(Netherlands|Dutch|Amsterdam|Rotterdam|Utrecht|Eindhoven|The Hague|Venlo)\b/],
+  ['Ireland', /\b(Ireland|Irish|Dublin|Cork)\b/],
+  ['Nordics', /\b(Nordic\w*|Sweden|Swedish|Stockholm|Gothenburg|Denmark|Danish|Copenhagen|Finland|Finnish|Helsinki|Norway|Norwegian|Oslo|Heimstaden|Catena|Sagax)\b/],
+  ['Poland/CEE', /\b(Poland|Polish|Warsaw|Czech|Prague|Hungary|Budapest|Romania|Bucharest|Slovakia|CEE|CTP)\b/],
+  ['Italy', /\b(Italy|Italian|Milan|Rome|Turin)\b/],
+];
+function countryOf(title, source) {
+  for (const [c, rx] of COUNTRIES) if (rx.test(title)) return c;
+  if (/^(Property Week|EG|React News|Property Industry Eye|City AM|PBSA News|BTR News)$/.test(source)) return 'UK';
+  return 'Europe';
+}
+const REPORT_KIND_RX = /\b(report|research|outlook|survey|index|Q[1-4]|H[12]|take-up|forecast|study|barometer|figures|data (shows|reveals)|market in minutes|snapshot|briefing|review of|predicts|expects|finds)\b/i;
+const INSIGHT_RX = /(\bopinion\b|\bcomment\b|\bcolumn\b|\bblog\b|\banalysis\b|^why |^how |^what |^is |^can |\?$|lessons|the case for|time to|\bview:|explained|deep dive|interview)/i;
+function kindOf(x) {
+  if (x.deal || (DEAL_RX.test(x.title) && (AMOUNT_RX.test(x.title) || /\b(acquir\w*|buys?|sells?|sold|forward[- ]fund\w*|joint venture|JV|pre-let)\b/i.test(x.title)))) return 'Deal';
+  if (x.group || REPORT_KIND_RX.test(x.title) || (x.hint === 'report' && REPORT_RX.test(x.title))) return 'Report';
+  if (INSIGHT_RX.test(x.title)) return 'Insight';
+  return 'Update';
+}
+
 const STRICT_SOURCES = new Set(['ft-economy', 'ft-markets', 'bbc-business', 'guardian-business', 'sky-business', 'reuters-macro', 'ecb', 'boe']);
 const UK_PRESS = new Set(['pie', 'reactnews', 'eg', 'propertyweek', 'cityam-property']);
 const AMOUNT_RX = /([£€$])\s?(\d+(?:[.,]\d+)?)\s?(bn|billion|m\b|mn|million)/i;
@@ -161,9 +191,10 @@ async function fetchNews() {
     }
   });
 
-  const maxAge = { markets: 7 * 24, reports: 60 * 24, deals: 21 * 24 };
+  const maxAge = { markets: 7 * 24, reports: 60 * 24, deals: 21 * 24, sector: 60 * 24 };
   const seen = new Map();
   const out = { markets: [], reports: [], deals: [] };
+  const sectorRaw = [];
 
   for (const r of raw) {
     const { src } = r;
@@ -221,6 +252,16 @@ async function fetchNews() {
       item.group = src.group;
       item.about = src.name;
       item.period = (title.match(/\b(Q[1-4]\s?(?:20)?\d{2}|H[12]\s?(?:20)?\d{2}|20\d{2} outlook)\b/i) || [])[0] || null;
+    }
+
+    if (src.section === 'sector') {
+      if (nonEu) continue;
+      const rx = src.sector === 'resi' ? RESI_RX : LOGI_RX;
+      if (!rx.test(title)) continue;
+      if (src.sector === 'logi' && !LOGI_CONTEXT_RX.test(title)) continue;
+      if (!UK_RX.test(title) && !EU_RX.test(title) && !src.url.includes('site%3A') && !NAMED_PLAYER_RX.test(title)) continue;
+      sectorRaw.push({ ...item, sector: src.sector, hint: src.hint });
+      continue;
     }
 
     // dedupe across sections by title
@@ -282,6 +323,20 @@ async function fetchNews() {
   out.deals = dedupeFuzzy(out.deals);
   out.reports = dedupeFuzzy(out.reports);
 
+  // Sector pages: dedicated queries + matching stories from the general feeds
+  for (const [key, rx] of [['resi', RESI_RX], ['logi', LOGI_RX]]) {
+    const pool_ = [
+      ...sectorRaw.filter((x) => x.sector === key),
+      ...[...out.markets, ...out.reports, ...out.deals]
+        .filter((x) => x.cat === 're' && rx.test(x.title) && (key !== 'logi' || LOGI_CONTEXT_RX.test(x.title)) && !(NON_EU_RX.test(x.title) && !UK_RX.test(x.title) && !EU_RX.test(x.title)))
+        .map((x) => ({ ...x })),
+    ].map((x) => {
+      const { hint, sector, ...rest } = x;
+      return { ...rest, kind: kindOf(x), country: countryOf(x.title, x.source) };
+    });
+    out[key] = dedupeFuzzy(pool_);
+  }
+
   // Headlines ranking
   const MACRO_BOOST = /\b(Bank of England|BoE|ECB|interest rates?|rate cut|rate rise|inflation|gilts?|bond yields?|Budget|Reeves|Lagarde|Bailey|recession|GDP|Treasury)\b/i;
   const RE_BOOST = /\b(real estate|property|REIT|yields?|logistics|offices?|portfolio|fund|landlord|developer|valuations?)\b/i;
@@ -313,7 +368,7 @@ async function fetchNews() {
   }
 
   const byDate = (a, b) => Date.parse(b.date) - Date.parse(a.date);
-  for (const k of Object.keys(out)) out[k] = out[k].sort(byDate).slice(0, k === 'markets' ? 300 : 160).map(({ w, ...rest }) => rest);
+  for (const k of Object.keys(out)) out[k] = out[k].sort(byDate).slice(0, k === 'markets' ? 300 : k === 'resi' || k === 'logi' ? 200 : 160).map(({ w, ...rest }) => rest);
   status.sort((a, b) => a.section.localeCompare(b.section) || a.id.localeCompare(b.id));
   return { generated: new Date(NOW).toISOString(), headlines, ...out, sourceStatus: status };
 }
@@ -518,7 +573,7 @@ const [prevMetrics, prevNews] = await Promise.all([loadPrevious('metrics.json'),
 const [news, metrics] = await Promise.all([fetchNews(), fetchMetrics(prevMetrics)]);
 
 // If a whole section came back empty (e.g. Google blocked us), keep last good copy.
-for (const k of ['markets', 'reports', 'deals']) {
+for (const k of ['markets', 'reports', 'deals', 'resi', 'logi']) {
   if (!news[k].length && prevNews?.[k]?.length) {
     news[k] = prevNews[k];
     news.stale = [...(news.stale || []), k];
@@ -530,7 +585,11 @@ await writeFile(new URL('news.json', OUT), JSON.stringify(news));
 await writeFile(new URL('metrics.json', OUT), JSON.stringify(metrics, null, 1));
 
 const ok = news.sourceStatus.filter((s) => s.ok).length;
-console.log(`News: ${news.markets.length} markets, ${news.reports.length} reports, ${news.deals.length} deals, ${news.headlines.length} headlines; sources ok ${ok}/${news.sourceStatus.length}`);
+console.log(`News: ${news.markets.length} markets, ${news.reports.length} reports, ${news.deals.length} deals, ${news.resi?.length} resi, ${news.logi?.length} logi, ${news.headlines.length} headlines; sources ok ${ok}/${news.sourceStatus.length}`);
 for (const s of news.sourceStatus) console.log(`  ${s.ok ? 'OK ' : 'ERR'} ${s.section.padEnd(8)} ${s.id.padEnd(18)} ${s.ok ? s.count : s.error}`);
 console.log('Metrics:');
 for (const m of metrics.metrics) console.log(`  ${m.ok ? 'OK ' : 'ERR'} ${m.id.padEnd(12)} ${m.value ?? '-'} ${m.date ?? ''} ${m.error ?? ''}`);
+for (const k of ['resi', 'logi']) {
+  console.log(`Sector ${k}:`);
+  for (const x of (news[k] || []).slice(0, 25)) console.log(`  [${x.kind}] [${x.country}] ${x.source} | ${x.title.slice(0, 100)}`);
+}
