@@ -18,17 +18,16 @@ export const SOURCES = [
   { id: 'ft-economy', name: 'FT', kind: 'rss', url: 'https://www.ft.com/global-economy?format=rss', section: 'markets', cat: 'macro', sub: true, paywall: true, weight: 1.2 },
   { id: 'ft-markets', name: 'FT', kind: 'rss', url: 'https://www.ft.com/markets?format=rss', section: 'markets', cat: 'macro', sub: true, paywall: true, weight: 1.1 },
   { id: 'costar', name: 'CoStar', kind: 'gnews', url: gnews('site:costar.com (UK OR London OR Europe) when:7d'), section: 'markets', cat: 're', sub: true, paywall: true, weight: 1.3 },
-  { id: 'greenstreet', name: 'Green Street', kind: 'gnews', url: gnews('"Green Street" real estate (Europe OR UK) when:14d'), section: 'markets', cat: 're', sub: true, paywall: true, weight: 1.2 },
+  { id: 'greenstreet', name: 'Green Street', kind: 'gnews', url: gnews('site:greenstreet.com when:30d'), section: 'markets', cat: 're', sub: true, paywall: true, weight: 1.2 },
 
   // ---------- MARKET UPDATES: real estate trade press ----------
   { id: 'pie', name: 'Property Industry Eye', kind: 'rss', url: 'https://propertyindustryeye.com/feed/', section: 'markets', cat: 're', weight: 0.9 },
-  { id: 'reactnews', name: 'React News', kind: 'gnews', url: gnews('site:reactnews.com when:7d'), section: 'markets', cat: 're', paywall: true, weight: 1.1 },
-  { id: 'eg', name: 'EG', kind: 'gnews', url: gnews('site:egi.co.uk when:7d'), section: 'markets', cat: 're', paywall: true, weight: 1.0 },
+  { id: 'reactnews', name: 'React News', kind: 'gnews', url: gnews('"React News" when:30d'), section: 'markets', cat: 're', weight: 1.0 },
+  { id: 'eg', name: 'EG', kind: 'gnews', url: gnews('"Estates Gazette" when:14d'), section: 'markets', cat: 're', weight: 1.0 },
+  { id: 'cityam-property', name: 'City AM', kind: 'rss', url: 'https://www.cityam.com/category/property/feed/', section: 'markets', cat: 're', weight: 0.9 },
   { id: 'propertyweek', name: 'Property Week', kind: 'gnews', url: gnews('site:propertyweek.com when:7d'), section: 'markets', cat: 're', paywall: true, weight: 1.0 },
   { id: 'ipe-ra', name: 'IPE Real Assets', kind: 'gnews', url: gnews('site:realassets.ipe.com when:14d'), section: 'markets', cat: 're', weight: 1.0 },
-  { id: 'pere', name: 'PERE', kind: 'rss', url: 'https://www.perenews.com/feed/', section: 'markets', cat: 're', paywall: true, weight: 1.1 },
-  { id: 'pere-g', name: 'PERE', kind: 'gnews', url: gnews('site:perenews.com when:14d'), section: 'markets', cat: 're', paywall: true, weight: 1.1 },
-  { id: 'recapital', name: 'Real Estate Capital Europe', kind: 'gnews', url: gnews('site:recapitalnews.com when:14d'), section: 'markets', cat: 're', paywall: true, weight: 1.0 },
+  { id: 'pere-g', name: 'PERE', kind: 'gnews', url: gnews('site:perenews.com when:30d'), section: 'markets', cat: 're', paywall: true, weight: 1.1 },
   { id: 'bisnow', name: 'Bisnow', kind: 'gnews', url: gnews('site:bisnow.com london when:7d'), section: 'markets', cat: 're', weight: 0.9 },
   { id: 'reuters-re', name: 'Reuters', kind: 'gnews', url: gnews('site:reuters.com (property OR "real estate") (UK OR Britain OR Europe) when:7d'), section: 'markets', cat: 're', weight: 1.1 },
 

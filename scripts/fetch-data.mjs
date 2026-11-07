@@ -163,7 +163,8 @@ async function fetchNews() {
       // Google News titles end with " - Publisher"
       const pub = r.publisher || (title.match(/ - ([^-]+)$/) || [])[1];
       if (pub) title = title.replace(new RegExp(`\\s+-\\s+${pub.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`), '');
-      if (src.section !== 'markets' || src.id.startsWith('reuters') || src.id === 'greenstreet') publisher = pub || src.name;
+      // site:-restricted queries keep the configured name; open searches show the real publisher
+      if (!src.url.includes('site%3A') || src.section !== 'markets') publisher = pub || src.name;
       r.summary = ''; // gnews descriptions are just the title + publisher
     }
     const date = r.date && !isNaN(Date.parse(r.date)) ? r.date : new Date(NOW).toISOString();
@@ -327,16 +328,23 @@ async function ons(path, cdid, dataset, freq = 'months') {
   return s.slice(-40);
 }
 
-async function eurostatUnemp() {
-  const url = 'https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/une_rt_m?geo=EA20&s_adj=SA&age=TOTAL&sex=T&unit=PC_ACT&lastTimePeriod=24&format=JSON';
+async function eurostat(dataset, params) {
+  const url = `https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/${dataset}?${params}&lastTimePeriod=24&format=JSON`;
   const j = JSON.parse(await get(url, { accept: 'application/json' }));
-  const idx = j.dimension.time.category.index;
+  const idx = j.dimension?.time?.category?.index || {};
   const s = Object.entries(idx)
     .sort((a, b) => a[1] - b[1])
-    .map(([t, i]) => [t, j.value[i]])
+    .map(([t, i]) => [t.replace(/^(\d{4})M(\d{2})$/, '$1-$2'), j.value?.[i]])
     .filter(([, v]) => typeof v === 'number');
   if (!s.length) throw new Error('Eurostat: empty');
   return s;
+}
+// Euro-area codes changed when Bulgaria joined (2026): try all, keep the freshest series.
+async function euroArea(dataset, params) {
+  const res = await Promise.allSettled(['EA21', 'EA', 'EA20'].map((geo) => eurostat(dataset, `geo=${geo}&${params}`)));
+  const ok = res.filter((r) => r.status === 'fulfilled').map((r) => r.value);
+  if (!ok.length) throw res[0].reason;
+  return ok.sort((a, b) => (b.at(-1)[0] > a.at(-1)[0] ? 1 : -1))[0];
 }
 
 async function firstOk(...fns) {
@@ -394,8 +402,8 @@ const METRICS = [
 
   ['inflation', 'uk-cpi', 'UK CPI (YoY)', 'UK', '%', 'prev', 24, 'ONS', () => ons('economy/inflationandpriceindices', 'd7g7', 'mm23')],
   ['inflation', 'uk-core', 'UK Core CPI', 'UK', '%', 'prev', 24, 'ONS', () => ons('economy/inflationandpriceindices', 'dko8', 'mm23')],
-  ['inflation', 'ez-hicp', 'EZ HICP (YoY)', 'EZ', '%', 'prev', 24, 'ECB / Eurostat', () => ecb('ICP', 'M.U2.N.000000.4.ANR', 36)],
-  ['inflation', 'ez-core', 'EZ Core HICP', 'EZ', '%', 'prev', 24, 'ECB / Eurostat', () => ecb('ICP', 'M.U2.N.XEF000.4.ANR', 36)],
+  ['inflation', 'ez-hicp', 'EZ HICP (YoY)', 'EZ', '%', 'prev', 24, 'Eurostat', () => euroArea('prc_hicp_manr', 'coicop=CP00')],
+  ['inflation', 'ez-core', 'EZ Core HICP', 'EZ', '%', 'prev', 24, 'Eurostat', () => euroArea('prc_hicp_manr', 'coicop=TOT_X_NRG_FOOD')],
 
   ['bonds', 'gilt10', '10Y Gilt', 'UK', '%', 'month', 60, 'Bank of England', () => firstOk(() => boe('IUDMNPY'), () => boe('IUDMNZC'))],
   ['bonds', 'gilt5', '5Y Gilt', 'UK', '%', 'month', 60, 'Bank of England', () => firstOk(() => boe('IUDSNPY'), () => boe('IUDSNZC'))],
@@ -404,7 +412,7 @@ const METRICS = [
 
   ['macro', 'uk-gdp', 'UK GDP (QoQ)', 'UK', '%', 'prev', 12, 'ONS', () => ons('economy/grossdomesticproductgdp', 'ihyq', 'qna', 'quarters')],
   ['macro', 'uk-unemp', 'UK Unemployment', 'UK', '%', 'prev', 24, 'ONS', () => ons('employmentandlabourmarket/peoplenotinwork/unemployment', 'mgsx', 'lms')],
-  ['macro', 'ez-unemp', 'EZ Unemployment', 'EZ', '%', 'prev', 24, 'Eurostat', eurostatUnemp],
+  ['macro', 'ez-unemp', 'EZ Unemployment', 'EZ', '%', 'prev', 24, 'Eurostat', () => euroArea('une_rt_m', 's_adj=SA&age=TOTAL&sex=T&unit=PC_ACT')],
   ['fx', 'eurgbp', 'EUR/GBP', 'FX', '', 'month', 60, 'ECB', () => ecb('EXR', 'D.GBP.EUR.SP00.A', 300)],
   ['fx', 'gbpusd', 'GBP/USD', 'FX', '', 'month', 60, 'ECB (derived)', async () => {
     const [usd, gbp] = await Promise.all([ecb('EXR', 'D.USD.EUR.SP00.A', 300), ecb('EXR', 'D.GBP.EUR.SP00.A', 300)]);
