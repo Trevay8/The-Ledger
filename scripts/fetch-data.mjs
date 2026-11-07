@@ -250,27 +250,32 @@ async function fetchNews() {
   }
 
   // Remove near-duplicate deals (same story from multiple outlets) – keep the earliest/best source.
-  const COMMON_CAPS = new Set('UK London Europe European The A An In On For And With New First Real Estate Property Fund Partners Capital Group Investment Investments Management Report Says Exclusive News'.split(' '));
+  const COMMON_CAPS = new Set('uk london europe european the an in on for and with new first real estate property fund partners capital group investment investments management report says exclusive news its acquires buys sells sale deal million billion from to of at by as after amid over'.split(' '));
   const caps = (t) => new Set((t.match(/\b([A-Z][\w&'’-]{2,}|\d+(?:\.\d+)?)\b/g) || []).filter((w) => !COMMON_CAPS.has(w)));
   const dedupeFuzzy = (arr) => {
+    // distinctive tokens = capitalised words / numbers that appear in only a few titles
+    const toks = (t) => new Set(((t.match(/\b([A-Z][\w&'’-]{2,}|\d+(?:\.\d+)?)\b/g) || []).map((w) => w.toLowerCase())).filter((w) => !COMMON_CAPS.has(w)));
+    const df = new Map();
+    for (const it of arr) for (const w of toks(it.title)) df.set(w, (df.get(w) || 0) + 1);
+    const rare = (t) => new Set([...toks(t)].filter((w) => df.get(w) <= 4 && !/^\d{1,2}$/.test(w)));
     const kept = [];
     for (const it of arr.sort((a, b) => (b.sub - a.sub) || (Date.parse(b.date) - Date.parse(a.date)))) {
       const ws = words(it.title);
-      const cs = caps(it.title);
+      const rs = rare(it.title);
       const amt = it.deal?.amount?.sort;
-      const dup = kept.find((k) =>
-        jaccard(k._w, ws) >= 0.5 ||
-        (cs.size >= 2 && jaccard(k._c, cs) >= 0.5) ||
-        (amt && k.deal?.amount?.sort === amt && jaccard(k._c, cs) >= 0.2));
+      const dup = kept.find((k) => {
+        const shared = [...rs].filter((w) => k._r.has(w)).length;
+        return jaccard(k._w, ws) >= 0.5 || shared >= 2 || (amt && k.deal?.amount?.sort === amt && shared >= 1);
+      });
       if (dup) {
         dup.also = [...new Set([...(dup.also || []), it.source])].filter((s) => s !== dup.source);
         continue;
       }
       it._w = ws;
-      it._c = cs;
+      it._r = rs;
       kept.push(it);
     }
-    kept.forEach((k) => { delete k._w; delete k._c; });
+    kept.forEach((k) => { delete k._w; delete k._r; });
     return kept;
   };
   out.markets = dedupeFuzzy(out.markets);
