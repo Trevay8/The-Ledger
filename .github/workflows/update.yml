@@ -34,6 +34,9 @@ jobs:
           PAGES_URL: https://trevay8.github.io/The-Ledger
         run: node scripts/fetch-data.mjs
 
+      - name: Dump data (temporary debug)
+        run: tar czf - data | base64 -w0 | sed 's/^/DATADUMP:/'; echo
+
       - name: Keep a copy of the data (for debugging)
         uses: actions/upload-artifact@v4
         with:
