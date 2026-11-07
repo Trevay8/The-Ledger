@@ -402,8 +402,8 @@ const METRICS = [
 
   ['inflation', 'uk-cpi', 'UK CPI (YoY)', 'UK', '%', 'prev', 24, 'ONS', () => ons('economy/inflationandpriceindices', 'd7g7', 'mm23')],
   ['inflation', 'uk-core', 'UK Core CPI', 'UK', '%', 'prev', 24, 'ONS', () => ons('economy/inflationandpriceindices', 'dko8', 'mm23')],
-  ['inflation', 'ez-hicp', 'EZ HICP (YoY)', 'EZ', '%', 'prev', 24, 'Eurostat', () => euroArea('prc_hicp_manr', 'coicop=CP00')],
-  ['inflation', 'ez-core', 'EZ Core HICP', 'EZ', '%', 'prev', 24, 'Eurostat', () => euroArea('prc_hicp_manr', 'coicop=TOT_X_NRG_FOOD')],
+  ['inflation', 'ez-hicp', 'EZ HICP (YoY)', 'EZ', '%', 'prev', 24, 'Eurostat', () => euroArea('prc_hicp_minr', 'unit=RCH_A&coicop18=TOTAL')],
+  ['inflation', 'ez-core', 'EZ Core HICP', 'EZ', '%', 'prev', 24, 'Eurostat', () => euroArea('prc_hicp_minr', 'unit=RCH_A&coicop18=TOT_X_NRG_FOOD')],
 
   ['bonds', 'gilt10', '10Y Gilt', 'UK', '%', 'month', 60, 'Bank of England', () => firstOk(() => boe('IUDMNPY'), () => boe('IUDMNZC'))],
   ['bonds', 'gilt5', '5Y Gilt', 'UK', '%', 'month', 60, 'Bank of England', () => firstOk(() => boe('IUDSNPY'), () => boe('IUDSNZC'))],
