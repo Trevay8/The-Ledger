@@ -34,6 +34,13 @@ jobs:
           PAGES_URL: https://trevay8.github.io/The-Ledger
         run: node scripts/fetch-data.mjs
 
+      - name: Keep a copy of the data (for debugging)
+        uses: actions/upload-artifact@v4
+        with:
+          name: data
+          path: data/
+          retention-days: 3
+
       - id: pages
         uses: actions/configure-pages@v5
 
