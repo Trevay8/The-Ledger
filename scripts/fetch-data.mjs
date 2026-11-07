@@ -94,11 +94,20 @@ function parseFeed(xml) {
 const PAYWALLED = /^(FT|Financial Times|CoStar|EG|Estates Gazette|React News|Property Week|PERE|Bloomberg|The Wall Street Journal|WSJ|The Times|The Telegraph|Real Estate Capital Europe|Green Street|The Economist|Reuters Breakingviews)/i;
 const SUB_PUBS = /^(FT|Financial Times|CoStar|Green Street)/i;
 
-const DEAL_RX = /\b(acquir\w*|buys?|bought|sells?|sold|sale of|disposal|dispos\w+|offload\w*|snaps? up|purchas\w+|forward[- ]fund\w*|joint venture|JV|final close|first close|closes? fund|raises?|raised|refinanc\w+|loan|financing|lends?|merger|takeover|bid for|agrees? to buy|swoops)\b/i;
+const DEAL_RX = /\b(acquir\w*|buys?|bought|sells?|sold|sale of|disposal|dispos\w+|offload\w*|snaps? up|purchas\w+|forward[- ]fund\w*|joint venture|JV|final close|first close|closes? fund|refinanc\w+|loan|financing|lends?|merger|takeover|bid for|agrees? to buy|swoops)\b|\b(raises?|raised)\b.*\bfund|\bfund\b.*\b(raises?|raised)\b/i;
+
+// Relevance vocab
+const RE_RX = /\b(property|properties|real estate|REITs?|offices?|logistics|warehous\w*|industrial|retail parks?|shopping cent\w+|malls?|residential|housing|homes?|landlords?|tenants?|lettings?|leas(e|es|ing)|rents?|rental|student accommodation|PBSA|build[- ]to[- ]rent|BTR|hotels?|data cent\w+|life sciences?|self[- ]storage|care homes?|portfolios?|valuations?|yields?|developers?|development|sq ft|square feet|acres|towers?|buildings?|estates?|planning|construction|housebuild\w*|mortgages?|house prices|commercial property|investment volumes?|vacancy|occupiers?|asset manag\w+|private equity|funds?|Blackstone|Brookfield|Landsec|British Land|SEGRO|Unite|Grainger|Derwent|Great Portland|LondonMetric|Tritax|Vonovia|Unibail)\b/i;
+const MACRO_RX = /\b(inflation|CPI|interest rates?|rates? (cut|rise|hike|decision)s?|Bank of England|BoE|ECB|Federal Reserve|Fed|central banks?|MPC|gilts?|bonds?|bund|treasur(y|ies)|Budget|Reeves|Chancellor|Lagarde|Bailey|Starmer|GDP|growth|recession|econom(y|ic|ies)|unemployment|jobs|wages|pay growth|labour market|tax(es)?|borrowing|deficit|debt|sterling|pound|euro|eurozone|FTSE|stocks?|markets?|tariffs?|trade|oil|energy|PMI|retail sales|spending|OBR|IMF|OECD|banks?|lenders?|credit|insolvenc\w+)\b/i;
+const LIFESTYLE_RX = /\b(House ?& ?Home|getaways?|holiday|interiors?|gardens?|garden design|recipes?|wine|travel|style|fashion|crossword|Special$|podcast|quiz|horoscope|celebrity|premiere|football|cricket|Strictly|odd jobs|dream home|property of the week|homes for sale|on the market:|what you can buy)\b/i;
+const JUNK_RX = /(stock price|latest news\b|^my |^sign in|^subscribe|quote of|\$[A-Z]{2,5}\b|shares of|earnings call|\(NYSE|\(NASDAQ|\.N\)|webinar|^events?\b|job vacanc|careers)/i;
+const NON_EU_RX = /\b(U\.S\.|US|USA|American|New York|NYC|Manhattan|Brooklyn|Texas|Houston|Austin|California|Los Angeles|San Francisco|Florida|Miami|Chicago|Atlanta|Dallas|Denver|Boston|Seattle|Phoenix|Washington|D\.C\.|Philadelphia|Nashville|Charlotte|Las Vegas|Canada|Toronto|Montreal|Vancouver|Mexico|China|Chinese|Hong Kong|Japan|Tokyo|Singapore|Korea|Seoul|Australia|Sydney|Melbourne|India|Indian|Delhi|NCR|Mumbai|Bengaluru|Bangalore|Hyderabad|Chennai|Pune|APAC|Asia|Asian|Dubai|UAE|Saudi|Riyadh|Qatar|Africa|Nigeria|Nigerian|Lagos|Brazil|Paraguay|Argentina)\b/;
+const STRICT_SOURCES = new Set(['ft-economy', 'ft-markets', 'bbc-business', 'guardian-business', 'sky-business', 'reuters-macro', 'ecb', 'boe']);
+const UK_PRESS = new Set(['pie', 'reactnews', 'eg', 'propertyweek', 'cityam-property']);
 const AMOUNT_RX = /([£€$])\s?(\d+(?:[.,]\d+)?)\s?(bn|billion|m\b|mn|million)/i;
 const REPORT_RX = /\b(report|research|survey|outlook|index|data|figures|quarter|Q[1-4]|H[12]|yields?|volumes?|vacanc\w+|rents?|forecast|market|analysis|finds|reveals|says|predicts|expects|warns|study|barometer|snapshot|review)\b/i;
 
-const UK_RX = /\b(UK|U\.K\.|Britain|British|England|English|Scotland|Scottish|Wales|Welsh|London|Manchester|Birmingham|Leeds|Bristol|Edinburgh|Glasgow|Liverpool|Cambridge|Oxford|Midlands|Mayfair|City of London|West End|Canary Wharf|Sheffield|Newcastle|Nottingham|Cardiff|Belfast|Reading)\b|£/;
+const UK_RX = /\b(UK|U\.K\.|Britain|British|England|English|Scotland|Scottish|Wales|Welsh|London|Manchester|Birmingham|Leeds|Bristol|Edinburgh|Glasgow|Liverpool|Cambridge|Oxford|Midlands|Mayfair|City of London|West End|Canary Wharf|Sheffield|Newcastle|Nottingham|Cardiff|Belfast)\b|£/;
 const EU_RX = /\b(Europe|European|EU|Eurozone|euro zone|German\w*|Berlin|Munich|Frankfurt|Hamburg|Düsseldorf|France|French|Paris|Lyon|Spain|Spanish|Madrid|Barcelona|Netherlands|Dutch|Amsterdam|Rotterdam|Italy|Italian|Milan|Rome|Ireland|Irish|Dublin|Nordic|Sweden|Swedish|Stockholm|Denmark|Danish|Copenhagen|Finland|Helsinki|Norway|Oslo|Poland|Polish|Warsaw|Belgium|Brussels|Portugal|Lisbon|Austria|Vienna|Switzerland|Swiss|Zurich|Czech|Prague)\b|€/;
 
 function dealInfo(text) {
@@ -171,6 +180,24 @@ async function fetchNews() {
     const ageH = (NOW - Date.parse(date)) / HOUR;
     if (ageH > maxAge[src.section]) continue;
 
+    // tidy titles
+    title = title.replace(/^(News|EXCLUSIVE|Exclusive|Analysis|Opinion)\s*[|:]\s*/, '').replace(/:\s*The [A-Z][\w ]+ Deal Sheet$/, '').trim();
+    if (title.length < 20 || JUNK_RX.test(title) || LIFESTYLE_RX.test(title)) continue;
+
+    // relevance gates
+    const nonEu = NON_EU_RX.test(title) && !UK_RX.test(title) && !EU_RX.test(title);
+    if (src.section === 'markets') {
+      if (STRICT_SOURCES.has(src.id) && !MACRO_RX.test(title) && !RE_RX.test(title)) continue;
+      if (src.cat === 're' && !STRICT_SOURCES.has(src.id) && !UK_PRESS.has(src.id) && !RE_RX.test(title) && !MACRO_RX.test(title)) continue;
+      if (src.id === 'ft-property' && !RE_RX.test(title)) continue;
+      if (nonEu && src.cat === 're') continue; // US/APAC property stories
+    }
+    if (src.section === 'reports') {
+      const own = (r.publisher || '').toLowerCase().includes(src.name.toLowerCase().split(' ')[0]);
+      if (nonEu) continue;
+      if (!own && !UK_RX.test(title) && !EU_RX.test(title) && !RE_RX.test(title)) continue;
+    }
+
     const text = `${title} ${r.summary}`;
     const paywall = !!src.paywall || PAYWALLED.test(publisher);
     const sub = !!src.sub || SUB_PUBS.test(publisher);
@@ -204,13 +231,15 @@ async function fetchNews() {
     // Deals: anything from deal queries, or deal-like RE stories from the trade press.
     const isDealCandidate = src.section === 'deals' || (src.section === 'markets' && src.cat === 're' && DEAL_RX.test(title));
     if (isDealCandidate && DEAL_RX.test(title)) {
+      if (nonEu) continue;
+      if (!RE_RX.test(title)) continue; // must actually be about real estate
+      if (/\b(consult\w*|software|tech\w* firm|law firm|boutique|agency|brand|shares|stock|premiere|charity|dinner|bank stake)\b/i.test(title)) continue;
       const d = dealInfo(text);
       if (!d.region) {
         // UK trade press with no explicit geography = assume UK
-        if (['pie', 'reactnews', 'eg', 'propertyweek', 'costar', 'bisnow'].includes(src.id)) d.region = 'UK';
+        if (UK_PRESS.has(src.id)) d.region = 'UK';
         else continue;
       }
-      if (/\b(U\.S\.|US|American|New York|Manhattan|Texas|California|Florida|Chicago|Atlanta|Dallas|China|Chinese|Hong Kong|Japan|Tokyo|Singapore|Australia|Sydney|India|Dubai|Saudi)\b/.test(title) && !UK_RX.test(title) && !EU_RX.test(title)) continue;
       const dkey = `dealx:${title.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 80)}`;
       if (seen.has(dkey)) continue;
       seen.set(dkey, true);
@@ -254,8 +283,11 @@ async function fetchNews() {
   // keep a healthy RE/macro mix: max 6 macro in top 10
   const headlines = [];
   let macro = 0;
+  const perSource = {};
   for (const it of ranked) {
     if (headlines.length >= 10) break;
+    if (!RE_RX.test(it.title) && !MACRO_RX.test(it.title)) continue;
+    if ((perSource[it.source] = (perSource[it.source] || 0) + 1) > 3) continue;
     if (it.cat === 'macro' && macro >= 5) continue;
     if (it.cat === 'macro') macro++;
     headlines.push(it.id);

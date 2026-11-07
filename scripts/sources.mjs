@@ -28,7 +28,7 @@ export const SOURCES = [
   { id: 'propertyweek', name: 'Property Week', kind: 'gnews', url: gnews('site:propertyweek.com when:7d'), section: 'markets', cat: 're', paywall: true, weight: 1.0 },
   { id: 'ipe-ra', name: 'IPE Real Assets', kind: 'gnews', url: gnews('site:realassets.ipe.com when:14d'), section: 'markets', cat: 're', weight: 1.0 },
   { id: 'pere-g', name: 'PERE', kind: 'gnews', url: gnews('site:perenews.com when:30d'), section: 'markets', cat: 're', paywall: true, weight: 1.1 },
-  { id: 'bisnow', name: 'Bisnow', kind: 'gnews', url: gnews('site:bisnow.com london when:7d'), section: 'markets', cat: 're', weight: 0.9 },
+  { id: 'bisnow', name: 'Bisnow', kind: 'gnews', url: gnews('site:bisnow.com/london when:7d'), section: 'markets', cat: 're', weight: 0.9 },
   { id: 'reuters-re', name: 'Reuters', kind: 'gnews', url: gnews('site:reuters.com (property OR "real estate") (UK OR Britain OR Europe) when:7d'), section: 'markets', cat: 're', weight: 1.1 },
 
   // ---------- MARKET UPDATES: macro ----------
@@ -37,7 +37,7 @@ export const SOURCES = [
   { id: 'sky-business', name: 'Sky News', kind: 'rss', url: 'https://feeds.skynews.com/feeds/rss/business.xml', section: 'markets', cat: 'macro', weight: 0.8 },
   { id: 'reuters-macro', name: 'Reuters', kind: 'gnews', url: gnews('site:reuters.com ("Bank of England" OR ECB OR gilts OR inflation OR "euro zone") when:3d'), section: 'markets', cat: 'macro', weight: 1.1 },
   { id: 'boe', name: 'Bank of England', kind: 'rss', url: 'https://www.bankofengland.co.uk/rss/news', section: 'markets', cat: 'macro', weight: 1.2 },
-  { id: 'ecb', name: 'ECB', kind: 'rss', url: 'https://www.ecb.europa.eu/rss/press.html', section: 'markets', cat: 'macro', weight: 1.1 },
+  { id: 'ecb', name: 'ECB', kind: 'rss', url: 'https://www.ecb.europa.eu/rss/press.html', section: 'markets', cat: 'macro', weight: 0.7 },
 
   // ---------- QUARTERLY REPORTS: brokers ----------
   ...[
@@ -54,7 +54,7 @@ export const SOURCES = [
     ['msci', 'MSCI', '"MSCI" (property OR "real estate" OR "real assets") index (UK OR Europe) when:30d'],
     ['inrev', 'INREV', 'INREV when:60d'],
     ['bpf', 'BPF', '"British Property Federation" when:30d'],
-    ['rics', 'RICS', 'RICS (survey OR "market survey") when:30d'],
+    ['rics', 'RICS', 'RICS (commercial OR residential OR property) survey when:30d'],
     ['gs-r', 'Green Street', '"Green Street" (CPPI OR "commercial property price index" OR research) when:45d'],
   ].map(([id, name, q]) => ({ id: `r-${id}`, name, kind: 'gnews', url: gnews(q), section: 'reports', group: 'data', cat: 're', weight: 1 })),
 
