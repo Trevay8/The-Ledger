@@ -106,6 +106,8 @@ const NON_EU_RX = /\b(U\.S\.|US|USA|American|New York|NYC|Manhattan|Brooklyn|Tex
 const RESI_RX = /\b(residential|build[- ]to[- ]rent|BTR|multi-?family|PBSA|student (accommodation|housing|beds?|homes)|co[- ]living|senior living|later living|retirement (homes|living|communities)|single[- ]family|SFH|rental (homes|housing|market|growth|sector)|apartments?|flats|housing|homes|landlords?|tenants?|rents?|private rented|PRS|affordable housing|social housing|house prices|housebuild\w*|Vonovia|LEG Immobilien|Heimstaden|Grainger|Unite (Students|Group)|Empiric|Quintain|Greystar|Get Living|Aroundtown|TAG Immobilien|Adler Group)\b/i;
 const LOGI_RX = /\b(logistics|warehous\w*|industrial (property|properties|real estate|estates?|parks?|space|market|units?|portfolio|assets?|sector|occupiers?|take-up|rents?|vacancy|investment)|big[- ]box|big shed|last[- ]mile|urban logistics|multi[- ]let|distribution (cent\w+|hubs?|parks?|warehouses?)|cold storage|Prologis|SEGRO|Tritax|VGP|Montea|CTP|Panattoni|GLP|P3 Logistic\w*|Logicor|Mileway|WDP|Warehouses De Pauw|Urban Logistics REIT|LondonMetric|Catena|Sagax|Industrials REIT)\b/i;
 const LOGI_CONTEXT_RX = /\b(property|properties|real estate|rents?|rental|take-up|vacancy|yields?|invest\w*|acquir\w*|buys?|sells?|sold|develop\w*|leas(e|es|ed|ing)|lets?|pre-let|sq ft|sq m|m²|square (feet|metres)|portfolio|REIT|parks?|scheme|occupiers?|warehous\w*|space|site|fund\w*|capital|Prologis|SEGRO|Tritax|VGP|Montea|CTP|Panattoni|GLP|Logicor|Mileway|WDP|LondonMetric)\b/i;
+const SECTOR_JUNK_RX = /\b(price target|stock|shares?|Form 8\.3|stake|non-exec\w*|board|director|appoints?|CEO says|awards?|commended|FC|football|police|officers)\b/i;
+const UK_OUTLETS_RX = /^(Property Week|EG|Estates Gazette|React News|Property Industry Eye|City AM|PBSA News|BTR News|Inside Housing)/;
 const NAMED_PLAYER_RX = /\b(Vonovia|LEG Immobilien|Heimstaden|Grainger|Unite|Empiric|Aroundtown|TAG Immobilien|Get Living|Quintain|Prologis|SEGRO|Tritax|VGP|Montea|CTP|Panattoni|GLP|P3|Logicor|Mileway|WDP|LondonMetric|Catena|Sagax)\b/;
 
 const COUNTRIES = [
@@ -259,7 +261,8 @@ async function fetchNews() {
       const rx = src.sector === 'resi' ? RESI_RX : LOGI_RX;
       if (!rx.test(title)) continue;
       if (src.sector === 'logi' && !LOGI_CONTEXT_RX.test(title)) continue;
-      if (!UK_RX.test(title) && !EU_RX.test(title) && !src.url.includes('site%3A') && !NAMED_PLAYER_RX.test(title)) continue;
+      if (SECTOR_JUNK_RX.test(title)) continue;
+      if (!UK_RX.test(title) && !EU_RX.test(title) && !src.url.includes('site%3A')) continue;
       sectorRaw.push({ ...item, sector: src.sector, hint: src.hint });
       continue;
     }
@@ -306,7 +309,8 @@ async function fetchNews() {
       const amt = it.deal?.amount?.sort;
       const dup = kept.find((k) => {
         const shared = [...rs].filter((w) => k._r.has(w)).length;
-        return jaccard(k._w, ws) >= 0.5 || shared >= 2 || (amt && k.deal?.amount?.sort === amt && shared >= 1);
+        const sameDay = Math.abs(Date.parse(k.date) - Date.parse(it.date)) < 30 * HOUR;
+        return jaccard(k._w, ws) >= 0.5 || shared >= 2 || (amt && k.deal?.amount?.sort === amt && shared >= 1) || (sameDay && jaccard(k._w, ws) >= 0.3);
       });
       if (dup) {
         dup.also = [...new Set([...(dup.also || []), it.source])].filter((s) => s !== dup.source);
@@ -328,7 +332,8 @@ async function fetchNews() {
     const pool_ = [
       ...sectorRaw.filter((x) => x.sector === key),
       ...[...out.markets, ...out.reports, ...out.deals]
-        .filter((x) => x.cat === 're' && rx.test(x.title) && (key !== 'logi' || LOGI_CONTEXT_RX.test(x.title)) && !(NON_EU_RX.test(x.title) && !UK_RX.test(x.title) && !EU_RX.test(x.title)))
+        .filter((x) => x.cat === 're' && rx.test(x.title) && (key !== 'logi' || LOGI_CONTEXT_RX.test(x.title)) && !SECTOR_JUNK_RX.test(x.title) &&
+          (UK_RX.test(x.title) || EU_RX.test(x.title) || UK_OUTLETS_RX.test(x.source)))
         .map((x) => ({ ...x })),
     ].map((x) => {
       const { hint, sector, ...rest } = x;
