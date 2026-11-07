@@ -96,7 +96,7 @@
     }
     const cls = Math.abs(diff) < 1e-9 ? 'flat' : diff > 0 ? 'up' : 'down';
     const arrow = cls === 'up' ? '▲' : cls === 'down' ? '▼' : '■';
-    const lbl = m.changeLabel && m.changeLabel.startsWith('last move') ? 'last move' : m.changeLabel === 'prev' ? 'vs prior' : m.changeLabel || '';
+    const lbl = m.changeLabel && m.changeLabel.startsWith('last move') ? '' : m.changeLabel === 'prev' ? 'vs prior' : m.changeLabel || '';
     return `<span class="chg ${cls}">${arrow} ${txt}<span class="lbl">${esc(lbl)}</span></span>`;
   }
 
