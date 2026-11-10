@@ -31,7 +31,7 @@ async function get(url, { timeout = 25000, accept, tries = 2 } = {}) {
       return await res.text();
     } catch (e) {
       lastErr = e;
-      await new Promise((r) => setTimeout(r, 1500 * (i + 1)));
+      await new Promise((r) => setTimeout(r, 4000 * (i + 1)));
     } finally {
       clearTimeout(t);
     }
@@ -182,16 +182,24 @@ function jaccard(a, b) {
 async function fetchNews() {
   const status = [];
   const raw = [];
-  await pool(SOURCES, 6, async (src) => {
+  // Direct feeds run in parallel; Google News is throttled, so it goes one at a time with a pause.
+  const direct = SOURCES.filter((s) => s.kind !== 'gnews');
+  const gnewsSrc = SOURCES.filter((s) => s.kind === 'gnews');
+  const handle = async (src) => {
     try {
-      const xml = await get(src.url);
+      const xml = await get(src.url, { tries: 4 });
       const items = parseFeed(xml);
       status.push({ id: src.id, name: src.name, section: src.section, ok: true, count: items.length });
       for (const it of items) raw.push({ ...it, src });
     } catch (e) {
       status.push({ id: src.id, name: src.name, section: src.section, ok: false, count: 0, error: String(e.message || e) });
     }
-  });
+  };
+  await pool(direct, 6, handle);
+  for (const src of gnewsSrc) {
+    await handle(src);
+    await new Promise((r) => setTimeout(r, 2500));
+  }
 
   const maxAge = { markets: 7 * 24, reports: 60 * 24, deals: 21 * 24, sector: 60 * 24 };
   const seen = new Map();
