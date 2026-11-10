@@ -1,5 +1,5 @@
 // Jarvis service worker: app shell stale-while-revalidate, data network-first.
-const VERSION = 'jarvis-v2';
+const VERSION = 'jarvis-v3';
 const SHELL = ['./', 'index.html', 'css/jarvis.css', 'js/jarvis.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png'];
 
 self.addEventListener('install', (e) => {
