@@ -12,7 +12,7 @@
 const gnews = (q) =>
   `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=en-GB&gl=GB&ceid=GB:en`;
 
-export const SOURCES = [
+const ALL_SOURCES = [
   // ---------- MARKET UPDATES: subscriptions ----------
   { id: 'ft-property', name: 'FT', kind: 'rss', url: 'https://www.ft.com/property?format=rss', section: 'markets', cat: 're', sub: true, paywall: true, weight: 1.3 },
   { id: 'ft-economy', name: 'FT', kind: 'rss', url: 'https://www.ft.com/global-economy?format=rss', section: 'markets', cat: 'macro', sub: true, paywall: true, weight: 1.2 },
@@ -101,3 +101,14 @@ export const SOURCES = [
     ['s-logi-ipe', 'site:realassets.ipe.com (logistics OR industrial OR warehouse) when:60d', 'IPE Real Assets'],
   ].map(([id, q, name, hint]) => ({ id, name: name || 'Google News', kind: 'gnews', url: gnews(q), section: 'sector', sector: 'logi', hint, cat: 're', weight: 1 })),
 ];
+
+// Rate-limit friendly set: low-value Google News searches are switched off to
+// keep requests per run low. Re-enable by removing an id from this list.
+const PAUSED = new Set([
+  'r-cbreim', 'r-nuveen', 'r-pgim', 'r-mg', 'r-blackstone', 'r-aew', 'r-lasalle', // fund managers
+  'r-msci', 'r-inrev', 'r-gs-r', 'r-colliers', // data bodies
+  'd-funds', 'd-jv', 'd-alts', // deal searches
+  's-resi-rents', 's-resi-inv', 's-resi-listed', 's-resi-btrnews', 's-logi-ipe', // sector searches
+  'bisnow',
+]);
+export const SOURCES = ALL_SOURCES.filter((s) => !PAUSED.has(s.id));

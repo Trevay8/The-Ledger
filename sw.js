@@ -1,5 +1,5 @@
 // Service worker: app shell cached (stale-while-revalidate), data network-first.
-const VERSION = 'ledger-v4';
+const VERSION = 'ledger-v5';
 const SHELL = ['./', 'index.html', 'css/styles.css', 'js/app.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png'];
 
 self.addEventListener('install', (e) => {

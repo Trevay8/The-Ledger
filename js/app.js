@@ -66,7 +66,7 @@
     if (y) state.yields = y;
     if (l) state.library = l;
     state.loadedAt = Date.now();
-    $('#drawerFoot').innerHTML = state.news ? `Data refreshed<br>${esc(new Date(state.news.generated).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' }))}<br>Auto-updates every 3h` : '';
+    $('#drawerFoot').innerHTML = state.news ? `Data refreshed<br>${esc(new Date(state.news.generated).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' }))}<br>Auto-updates every 6h` : '';
   }
 
   // ------------------------------------------------------------ components
@@ -270,7 +270,7 @@
     const lib = state.library;
     let html = chips('rFilter', [['all', 'All', items.length], ['brokers', 'Brokers', items.filter((x) => x.group === 'brokers').length], ['data', 'Data & Industry', items.filter((x) => x.group === 'data').length], ['managers', 'Fund Managers', items.filter((x) => x.group === 'managers').length]], f);
     html += `<section class="section"><div class="section-head"><h2 class="section-title">Latest research coverage</h2></div>
-      <div class="list">${filt.length ? groupedByDay(filt.slice(0, ui.rLimit || 40), (it) => itemHtml(it, { showAbout: true })) : emptyState('No research items yet', 'Feeds refresh every 3 hours.')}</div>
+      <div class="list">${filt.length ? groupedByDay(filt.slice(0, ui.rLimit || 40), (it) => itemHtml(it, { showAbout: true })) : emptyState('No research items yet', 'Feeds refresh every 6 hours.')}</div>
       ${filt.length > (ui.rLimit || 40) ? `<button class="more-btn" data-more="rLimit">Show more</button>` : ''}</section>`;
     if (lib) {
       const groups = lib.groups.filter((g) => f === 'all' || g.id === f);
@@ -376,7 +376,7 @@
     html += chips(key + 'Kind', [['all', 'All', items.length], ...kinds.map((k) => [k, label[k], items.filter((x) => x.kind === k).length])], kf);
     html += chips(key + 'Country', [['all', 'All regions'], ['UK', 'UK', items.filter((x) => x.country === 'UK').length], ['Continental', 'Continental', items.filter((x) => x.country !== 'UK').length], ...countries.map(([c, k]) => [c, c, k])], cf);
     if (!n) html += '<div class="skeleton"></div>';
-    else html += `<div class="list">${filt.length ? groupedByDay(filt.slice(0, ui[limKey] || 50), sectorItemHtml) : emptyState('Nothing yet', 'This page fills on the next data refresh (every 3 hours).')}</div>
+    else html += `<div class="list">${filt.length ? groupedByDay(filt.slice(0, ui[limKey] || 50), sectorItemHtml) : emptyState('Nothing yet', 'This page fills on the next data refresh (every 6 hours).')}</div>
       ${filt.length > (ui[limKey] || 50) ? `<button class="more-btn" data-more="${limKey}">Show more (${filt.length - (ui[limKey] || 50)})</button>` : ''}`;
     html += sectorYields(meta.yields);
     const lib = state.library?.sectors?.[key];
@@ -398,7 +398,7 @@
     html += (m?.metrics || []).map((x) => `<div class="status-row"><span class="${x.ok ? 'ok' : 'err'}">${x.ok ? '●' : '○'} ${esc(x.label)}</span><span>${esc(x.source || '')}${x.error ? ' · ' + esc(x.error) : ''}</span></div>`).join('') || emptyState('No data', '');
     html += `</div></section><section class="section"><div class="section-head"><h2 class="section-title">News feeds</h2></div><div class="card">`;
     html += (n?.sourceStatus || []).map((s) => `<div class="status-row"><span class="${s.ok ? 'ok' : 'err'}">${s.ok ? '●' : '○'} ${esc(s.name)} <span class="asof">${esc(s.section)}</span></span><span>${s.ok ? s.count + ' items' : esc(s.error)}</span></div>`).join('') || emptyState('No data', '');
-    html += `</div><div class="note">Feeds refresh every 3 hours via GitHub Actions. Edit scripts/sources.mjs to add or remove sources, and data/prime-yields.json each quarter.</div></section>`;
+    html += `</div><div class="note">Feeds refresh every 6 hours via GitHub Actions. Edit scripts/sources.mjs to add or remove sources, and data/prime-yields.json each quarter.</div></section>`;
     view.innerHTML = html;
   }
 

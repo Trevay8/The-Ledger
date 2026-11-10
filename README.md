@@ -12,7 +12,7 @@ A personal commercial-awareness app (PWA) for UK & European real estate and macr
 - **Saved**: anything you star
 
 ## How it works
-`.github/workflows/update.yml` runs every 3 hours: `scripts/fetch-data.mjs` pulls the RSS feeds and the official data APIs (BoE, ECB, ONS, Eurostat, Bundesbank), writes `data/*.json`, then deploys the site to GitHub Pages. There's no server and it costs nothing.
+`.github/workflows/update.yml` runs every 6 hours (or on manual trigger): `scripts/fetch-data.mjs` pulls the RSS feeds and the official data APIs (BoE, ECB, ONS, Eurostat, Bundesbank), writes `data/*.json`, then deploys the site to GitHub Pages. There's no server and it costs nothing.
 
 ## Maintenance
 | What | Where | When |
