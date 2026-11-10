@@ -179,12 +179,46 @@
   };
   const metric = (id) => state.metrics?.metrics?.find((m) => m.id === id);
 
+  function homeHeadlines() {
+    const n = state.news;
+    if (!n) return [];
+    const byId = new Map(n.markets.map((x) => [x.id, x]));
+    return n.headlines.map((id) => byId.get(id)).filter(Boolean);
+  }
+
+  function topStoryHtml(it) {
+    const why = [];
+    if (it.also?.length) why.push(`Also covered by ${it.also.slice(0, 3).join(', ')}`);
+    if (it.sub) why.push(`From your ${it.source} subscription`);
+    why.push(it.cat === 're' ? 'Real estate' : 'Macro & markets');
+    const isSaved = saved.has(it.id);
+    return `<article class="top-story${readSet.has(it.id) ? ' read' : ''}" data-id="${esc(it.id)}">
+      <div class="top-kicker">Today’s top story</div>
+      <a class="top-title" href="${esc(it.link)}" target="_blank" rel="noopener" data-open="${esc(it.id)}">${esc(it.title)}</a>
+      ${it.summary ? `<p class="top-sum">${esc(it.summary)}</p>` : ''}
+      <div class="item-meta" style="margin:10px 0 0"><span class="src">${esc(it.source)}</span>${it.paywall ? '<span class="lock">🔒︎</span>' : ''}<span>· ${ago(it.date)} ago</span></div>
+      <div class="top-why">${why.map(esc).join(' · ')}</div>
+      <div class="top-actions">
+        <a class="top-read" href="${esc(it.link)}" target="_blank" rel="noopener" data-open="${esc(it.id)}">Read story →</a>
+        <button class="top-save${isSaved ? ' on' : ''}" data-save="${esc(it.id)}">${isSaved ? '★ Saved' : '☆ Save'}</button>
+      </div>
+    </article>`;
+  }
+
   function renderHome() {
     const n = state.news;
     const now = new Date();
     const stale = n && Date.now() - Date.parse(n.generated) > 8 * 3600e3;
     let html = `<div class="dateline"><b>${now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}</b>
-      <span><span class="live-dot${stale ? ' stale' : ''}"></span>${n ? 'updated ' + ago(n.generated) + ' ago' : 'loading'}</span></div>`;
+      <span><span class="live-dot${stale ? ' stale' : ''}"></span>${n ? (ago(n.generated) === 'now' ? 'updated just now' : 'updated ' + ago(n.generated) + ' ago') : 'loading'}</span></div>`;
+
+    // News: the one story to read today
+    html += `<section class="section"><div class="section-head"><h2 class="section-title">News</h2><a class="section-link" href="#/markets">All news →</a></div>`;
+    if (n) {
+      const top = homeHeadlines()[0];
+      html += top ? topStoryHtml(top) : emptyState('No top story yet', 'It appears after the next data refresh.');
+    } else html += '<div class="skeleton"></div>';
+    html += `</section>`;
 
     // Metrics
     const groups = [['rates', 'Policy & money markets'], ['inflation', 'Inflation'], ['bonds', 'Government bonds'], ['macro', 'Growth & labour'], ['fx', 'FX']];
@@ -198,13 +232,12 @@
     } else html += `<div class="tiles">${'<div class="skeleton"></div>'.repeat(4)}</div>`;
     html += `</section>`;
 
-    // Headlines
-    html += `<section class="section"><div class="section-head"><h2 class="section-title">Top Headlines</h2><a class="section-link" href="#/markets">All news →</a></div>`;
+    // More headlines (the top story sits in the News section at the top)
+    html += `<section class="section"><div class="section-head"><h2 class="section-title">More Headlines</h2><a class="section-link" href="#/markets">All news →</a></div>`;
     if (n) {
-      const byId = new Map(n.markets.map((x) => [x.id, x]));
-      const hs = n.headlines.map((id) => byId.get(id)).filter(Boolean);
-      html += hs.length
-        ? `<div class="list">${hs.map((it, i) => itemHtml(it, i === 0 ? { lead: true } : { rank: i + 1, compact: true })).join('')}</div>`
+      const rest = homeHeadlines().slice(1);
+      html += rest.length
+        ? `<div class="list">${rest.map((it, i) => itemHtml(it, { rank: i + 2, compact: true })).join('')}</div>`
         : emptyState('No headlines yet', 'The first data refresh hasn’t run.');
     } else html += '<div class="skeleton"></div>';
     html += `</section>`;
@@ -472,7 +505,7 @@
     if (open) {
       readSet.add(open.dataset.open);
       persistRead();
-      open.closest('.item')?.classList.add('read');
+      open.closest('.item, .top-story')?.classList.add('read');
     }
   });
 

@@ -206,3 +206,14 @@ main { max-width: 760px; margin: 0 auto; padding: 14px 16px 48px; outline: none;
 .kind-Insight { background: rgba(242, 184, 75, 0.14); color: var(--amber); border-color: transparent; }
 .kind-Update { background: rgba(244, 247, 251, 0.08); color: var(--text); border-color: transparent; }
 .sector-intro { color: var(--muted); font-size: 13.5px; margin: 0 0 14px; }
+
+.top-story { background: linear-gradient(160deg, rgba(61,139,255,0.2), rgba(61,139,255,0.03) 65%), var(--surface); border: 1px solid var(--line-2); border-radius: 14px; padding: 16px 16px 14px; }
+.top-kicker { font: 600 10.5px/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-soft); margin-bottom: 10px; }
+.top-title { display: block; font-size: 22px; font-weight: 700; line-height: 1.25; letter-spacing: -0.015em; color: var(--text); }
+.top-story.read .top-title { color: var(--muted); }
+.top-sum { color: var(--muted); font-size: 14.5px; line-height: 1.5; margin: 10px 0 0; }
+.top-why { color: var(--dim); font: 11px/1.5 var(--mono); margin-top: 6px; }
+.top-actions { display: flex; gap: 8px; margin-top: 14px; }
+.top-read { background: var(--blue); color: #fff; font-weight: 600; font-size: 14px; padding: 10px 16px; border-radius: 9px; }
+.top-save { border: 1px solid var(--line-2); color: var(--text); font-weight: 500; font-size: 14px; padding: 10px 14px; border-radius: 9px; }
+.top-save.on { color: var(--amber); border-color: rgba(242,184,75,0.4); }
