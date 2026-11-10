@@ -1,0 +1,11 @@
+{
+  "note": "Placeholder. Your real MSc timetable lives in MyTimetable (mytimetable.city.ac.uk), which I can't reach. Send me a screenshot or export and I'll fill this in, or add slots yourself from the MSc tab.",
+  "term": { "start": "2026-09-14", "end": "2026-12-11", "name": "Term 1" },
+  "modules": [
+    { "code": "IM", "name": "Investment Markets", "colour": "#38bdf8" },
+    { "code": "DFI", "name": "Debt Finance & Investment", "colour": "#a78bfa" },
+    { "code": "REEA", "name": "Real Estate Equity Analysis", "colour": "#34d399" },
+    { "code": "FM", "name": "Fund Management & Vehicles", "colour": "#fbbf24" }
+  ],
+  "slots": []
+}

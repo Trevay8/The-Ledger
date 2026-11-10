@@ -1,0 +1,19 @@
+{
+  "generated": "2026-11-07T21:00:00Z",
+  "role": "Co-President, Bayes Real Estate Club. Your focus: events.",
+  "note": "Club admin mostly runs through your Bayes Outlook. Once it's connected, I'll pull room bookings, speaker threads and committee emails into this tab.",
+  "stages": ["Idea", "Speaker", "Room", "Promo", "Done"],
+  "checklist": ["Date agreed with committee", "Speaker / panel confirmed", "Room booked", "Sign-up link live", "LinkedIn post", "Reminder email to members", "Thank-you emails sent", "Photos / recap posted"],
+  "events": [],
+  "links": [
+    { "label": "Club LinkedIn page (you're Super Admin)", "url": "https://www.linkedin.com/company/bayes-real-estate-club/admin/" }
+  ],
+  "threads": [
+    { "who": "George Cresswell, Zorin Finance", "what": "Co-President intro and update sent 28 Oct", "status": "Awaiting reply", "date": "2026-10-28", "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1880237401858888738" },
+    { "who": "Anthony Raud, Zorin Finance", "what": "Co-President intro and update sent 28 Oct", "status": "Awaiting reply", "date": "2026-10-28", "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1880237113817468799" }
+  ],
+  "seedTasks": [
+    { "text": "Agree the Term 1 / early Term 2 event calendar with the committee", "due": "2026-11-14" },
+    { "text": "Follow up Zorin Finance (George / Anthony) if no reply by 11 Nov", "due": "2026-11-11" }
+  ]
+}
