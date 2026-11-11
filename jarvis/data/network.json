@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-07T21:00:00Z",
+ "generated": "2026-11-11T06:10:00Z",
  "source": "Notion: REPE Network Tracker / Target List, plus live Gmail threads",
  "notion": "https://app.notion.com/p/362d6d959544819daeaad7f3f094b213",
  "people": [
@@ -11,9 +11,9 @@
    "status": "Replied",
    "priority": "High",
    "sent": "2026-11-06",
-   "followup": null,
+   "followup": "2026-11-09",
    "alum": false,
-   "note": "Zoom proposed Wed 11 Nov 15:00. Not in Notion yet."
+   "note": "Zoom confirmed Wed 11 Nov 15:00 (he asked for an invite, you replied 9 Nov that it was sent). Not in Notion yet."
   },
   {
    "name": "Damon Wilson",
@@ -721,6 +721,369 @@
    "priority": "High",
    "sent": "2026-05-26",
    "followup": "2026-06-22",
+   "alum": false
+  },
+  {
+   "name": "Victoria Yakubenko",
+   "firm": "Tristan Capital Partners",
+   "role": "Executive Director, Asset Management",
+   "seniority": "VP / Director",
+   "status": "Connected",
+   "priority": "High",
+   "sent": "2026-05-26",
+   "followup": null,
+   "alum": true
+  },
+  {
+   "name": "Ben Mowbray",
+   "firm": "Greystar",
+   "role": "Managing Director, UK Investment",
+   "seniority": "Partner / MD",
+   "status": "No Response",
+   "priority": "High",
+   "sent": "2026-05-25",
+   "followup": "2026-09-03",
+   "alum": false
+  },
+  {
+   "name": "Raphael Sofoluke",
+   "firm": "UK Black Business Show",
+   "role": "Founder & CEO",
+   "seniority": "Partner / MD",
+   "status": "Connected",
+   "priority": "High",
+   "sent": "2026-05-22",
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Mark Ekinde",
+   "firm": "KKR",
+   "role": "Principal, European Real Estate Equity",
+   "seniority": "Principal",
+   "status": "No Response",
+   "priority": "High",
+   "sent": "2026-05-21",
+   "followup": "2026-06-22",
+   "alum": false
+  },
+  {
+   "name": "Tom Brown",
+   "firm": "Trinovare",
+   "role": "Portfolio & Asset Management",
+   "seniority": "VP / Director",
+   "status": "2nd Connection",
+   "priority": "High",
+   "sent": "2026-05-21",
+   "followup": null,
+   "alum": true
+  },
+  {
+   "name": "Fanny Girardin",
+   "firm": "Brookfield",
+   "role": "Real Estate Private Equity Analyst",
+   "seniority": "Analyst",
+   "status": "No Response",
+   "priority": "High",
+   "sent": "2026-05-21",
+   "followup": "2026-06-22",
+   "alum": false
+  },
+  {
+   "name": "Andrew Nolan",
+   "firm": "PGIM Real Estate",
+   "role": "Investment Associate",
+   "seniority": "Associate",
+   "status": "No Response",
+   "priority": "Medium",
+   "sent": "2026-05-21",
+   "followup": "2026-06-22",
+   "alum": false
+  },
+  {
+   "name": "Lukas Baum",
+   "firm": "Kadens Capital",
+   "role": "Associate (Frankfurt)",
+   "seniority": "Associate",
+   "status": "Connected",
+   "priority": "High",
+   "sent": "2026-05-21",
+   "followup": null,
+   "alum": true
+  },
+  {
+   "name": "Cara Hyowon Kim",
+   "firm": "Greystar",
+   "role": "Investment Analyst",
+   "seniority": "Analyst",
+   "status": "No Response",
+   "priority": "High",
+   "sent": "2026-05-18",
+   "followup": "2026-06-02",
+   "alum": true
+  },
+  {
+   "name": "Cara Popeck",
+   "firm": "Pears Global Real Estate Investors",
+   "role": "Investment Analyst",
+   "seniority": "Analyst",
+   "status": "Connected",
+   "priority": "Medium",
+   "sent": "2026-05-18",
+   "followup": null,
+   "alum": true
+  },
+  {
+   "name": "Daniel Breeden",
+   "firm": "Greystar",
+   "role": "SMD, Investment, Europe",
+   "seniority": "Partner / MD",
+   "status": "Outreach Sent",
+   "priority": "High",
+   "sent": "2026-04-28",
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Deborah Green",
+   "firm": "Redevco",
+   "role": "Head of Asset & Transaction Mgmt UK",
+   "seniority": "VP / Director",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": true
+  },
+  {
+   "name": "Irakli Meskhi",
+   "firm": "Starwood Capital",
+   "role": "MD, Co-Head RE Debt Europe",
+   "seniority": "Partner / MD",
+   "status": "Outreach Drafted",
+   "priority": "Medium",
+   "sent": null,
+   "followup": null,
+   "alum": true
+  },
+  {
+   "name": "Jonathan Mackie",
+   "firm": "EQT",
+   "role": "MD, EQT Real Estate",
+   "seniority": "Partner / MD",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Lee Coward",
+   "firm": "Oxford Properties (OMERS)",
+   "role": "Head of European Investments",
+   "seniority": "VP / Director",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Kieran Farrelly",
+   "firm": "Schroders Capital",
+   "role": "Global CIO Real Estate",
+   "seniority": "Partner / MD",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Kevin Aitchison",
+   "firm": "Savills Investment Management",
+   "role": "MD, Head of Equity RE Europe",
+   "seniority": "Partner / MD",
+   "status": "Outreach Drafted",
+   "priority": "Medium",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "James Ainscough",
+   "firm": "Long Harbour",
+   "role": "Investment Associate, SFH",
+   "seniority": "Associate",
+   "status": "Outreach Drafted",
+   "priority": "Medium",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Shirom Aggarwal",
+   "firm": "Goldman Sachs Alternatives",
+   "role": "Analyst, RE PE and credit",
+   "seniority": "Analyst",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Derek Richter",
+   "firm": "QuadReal",
+   "role": "SVP, UK Debt Investments",
+   "seniority": "VP / Director",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Seb d'Avanzo",
+   "firm": "KKR",
+   "role": "MD, Co-Head European RE Equity",
+   "seniority": "Partner / MD",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Louis Lallouette",
+   "firm": "Greystar",
+   "role": "Senior Investment Analyst, EMEA Capital Raising",
+   "seniority": "Analyst",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "David Dix",
+   "firm": "Townsend Group",
+   "role": "Partner / MD, discretionary portfolios",
+   "seniority": "Partner / MD",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Nam Do",
+   "firm": "Greykite",
+   "role": "VP, investment team",
+   "seniority": "VP / Director",
+   "status": "Outreach Drafted",
+   "priority": "Medium",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Ivo de Wit",
+   "firm": "Harrison Street",
+   "role": "MD, Portfolio Management",
+   "seniority": "Partner / MD",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Jenny Raphasha",
+   "firm": "LaSalle IM",
+   "role": "Global Solutions, Global Navigator Fund",
+   "seniority": "VP / Director",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Isabel Stibbs",
+   "firm": "Birchwood Real Estate Capital",
+   "role": "Associate, RE debt",
+   "seniority": "Associate",
+   "status": "Outreach Drafted",
+   "priority": "Medium",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Will Scrivens",
+   "firm": "Signal Capital Partners",
+   "role": "Associate, RE Investments",
+   "seniority": "Associate",
+   "status": "Outreach Drafted",
+   "priority": "Medium",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Alex Williamson",
+   "firm": "Nuveen Real Estate",
+   "role": "Investment Manager, RE UK",
+   "seniority": "VP / Director",
+   "status": "Outreach Drafted",
+   "priority": "Medium",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Tom Jackson",
+   "firm": "CPP Investments",
+   "role": "MD, Head of RE Europe",
+   "seniority": "Partner / MD",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Matilde Molinari Giglietti",
+   "firm": "Morgan Stanley Real Estate Investing",
+   "role": "RE Finance Analyst",
+   "seniority": "Analyst",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Sabine Jones",
+   "firm": "Europa Capital",
+   "role": "Director, Asset Management",
+   "seniority": "VP / Director",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
+   "alum": false
+  },
+  {
+   "name": "Jun San Chakma",
+   "firm": "Crosstree Real Estate Partners",
+   "role": "Analyst, Investments",
+   "seniority": "Analyst",
+   "status": "Outreach Drafted",
+   "priority": "High",
+   "sent": null,
+   "followup": null,
    "alum": false
   }
  ]
