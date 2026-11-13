@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-12T06:15:00Z",
+ "generated": "2026-11-13T06:15:00Z",
  "sources": [
   "Gmail",
   "Google Calendar",
@@ -11,27 +11,27 @@
  ],
  "urgent": [
   {
-   "id": "u-eqt",
-   "title": "EQT applications close today. Superday prep",
-   "detail": "SEO London recommended you on 6 Nov. Applications close today (12 Nov) and the Superday is 26 Nov, so an invite could land any day from now. Tell SEO London the moment you get it. Prep the case study, EQT Real Estate's logistics and living strategies, and use what Jay told you on the Zoom yesterday.",
-   "area": "apps",
-   "due": "2026-11-12",
-   "priority": "high",
-   "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881112459316162429"
-  },
-  {
    "id": "u-bx-rsvp",
-   "title": "Accept Damon Wilson's Blackstone invite (17 Nov)",
-   "detail": "Catch-up Tue 17 Nov, 17:00 at Berkeley Square House (Crystal Palace room, 3rd floor). It still shows 'needs action' on both your Gmail and Bayes calendars. Accept it, then prepare 3 questions.",
+   "title": "Accept Damon Wilson's Blackstone invite (Tue 17 Nov)",
+   "detail": "Catch-up Tue 17 Nov, 17:00 at Berkeley Square House (Crystal Palace room, 3rd floor). It still shows 'needs action' on both your Gmail and Bayes calendars. Accept it today, then prepare 3 questions.",
    "area": "network",
-   "due": "2026-11-13",
+   "due": "2026-11-14",
    "priority": "high",
    "link": "https://calendar.google.com/calendar/r/week/2026/11/17"
   },
   {
+   "id": "u-eqt",
+   "title": "EQT applications are closed. Be ready for a Superday invite",
+   "detail": "Applications closed on 12 Nov and the Superday is 26 Nov. No invite yet. Tell SEO London the moment one lands. Use the weekend for the case study, EQT Real Estate's logistics and living strategies, and what Jay told you on the Zoom.",
+   "area": "apps",
+   "due": "2026-11-20",
+   "priority": "high",
+   "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881112459316162429"
+  },
+  {
    "id": "u-income",
    "title": "Set your spend ceiling before the challenge ends",
-   "detail": "The AI Income Challenge runs to Sun 15 Nov, 17:00 VIP and 18:00 main (UK time). These usually end with a paid upsell. Decide now what you'd pay, if anything, and what you'd need to see first. Write one product idea you'll test this month.",
+   "detail": "The AI Income Challenge ends Sun 15 Nov, 17:00 VIP and 18:00 main (UK time). These usually end with a paid upsell. Decide now what you'd pay, if anything, and what you'd need to see first. Write one product idea you'll test this month.",
    "area": "income",
    "due": "2026-11-14",
    "priority": "medium",
@@ -51,19 +51,12 @@
    "title": "Check your Evercore Private Funds Group status",
    "detail": "Your video interview was due 6 Sep and there's been no email since. Log into the portal, confirm whether it's live or closed, then update the tracker.",
    "area": "apps",
-   "due": "2026-11-14",
+   "due": "2026-11-16",
    "priority": "medium",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1875108027848207162"
   }
  ],
  "events": [
-  {
-   "date": "2026-11-12",
-   "title": "EQT 2027 RE Summer Internship applications close",
-   "where": "Superday invites could arrive from today",
-   "area": "apps",
-   "allDay": true
-  },
   {
    "date": "2026-11-17T17:00:00",
    "end": "2026-11-17T17:30:00",
