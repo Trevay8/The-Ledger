@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-13T06:15:00Z",
+ "generated": "2026-11-14T06:15:00Z",
  "sources": [
   "Gmail",
   "Google Calendar",
@@ -13,7 +13,7 @@
   {
    "id": "u-bx-rsvp",
    "title": "Accept Damon Wilson's Blackstone invite (Tue 17 Nov)",
-   "detail": "Catch-up Tue 17 Nov, 17:00 at Berkeley Square House (Crystal Palace room, 3rd floor). It still shows 'needs action' on both your Gmail and Bayes calendars. Accept it today, then prepare 3 questions.",
+   "detail": "Catch-up is Tuesday at 17:00 at Berkeley Square House (Crystal Palace room, 3rd floor), three days away. It still shows 'needs action' on both your Gmail and Bayes calendars. Accept it today, then prepare 3 questions.",
    "area": "network",
    "due": "2026-11-14",
    "priority": "high",
@@ -30,8 +30,8 @@
   },
   {
    "id": "u-income",
-   "title": "Set your spend ceiling before the challenge ends",
-   "detail": "The AI Income Challenge ends Sun 15 Nov, 17:00 VIP and 18:00 main (UK time). These usually end with a paid upsell. Decide now what you'd pay, if anything, and what you'd need to see first. Write one product idea you'll test this month.",
+   "title": "Set your spend ceiling. The challenge ends tomorrow",
+   "detail": "The AI Income Challenge ends Sun 15 Nov, 17:00 VIP and 18:00 main (UK time). These usually end with a paid upsell. Decide today what you'd pay, if anything, and what you'd need to see first. Write one product idea you'll test this month.",
    "area": "income",
    "due": "2026-11-14",
    "priority": "medium",
@@ -40,7 +40,7 @@
   {
    "id": "u-dataannot",
    "title": "Finish your DataAnnotation assessment",
-   "detail": "You signed up on 11 Nov and the next step is picking and taking the assessment. It's paid remote AI-training work, so it could count toward your side-income target. Check the pay and hours before committing.",
+   "detail": "You signed up on 11 Nov and the assessment is still not started. It's paid remote AI-training work, so it could count toward your side-income target. Check the pay and hours before committing.",
    "area": "income",
    "due": "2026-11-15",
    "priority": "medium",
