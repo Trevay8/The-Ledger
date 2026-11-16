@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-15T06:15:00Z",
+ "generated": "2026-11-16T06:20:00Z",
  "note": "Built from Gmail. Internship confirmations mostly go to your Bayes Outlook, which isn't connected yet, so this list is incomplete. Notion's Internship Applications database is the master copy: edit there and Jarvis picks it up on the morning refresh.",
  "items": [
   {
@@ -21,6 +21,26 @@
    "updated": "2026-11-14",
    "next": "Confirmation received 14 Nov. They will be in touch with next steps.",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881860026932683105"
+  },
+  {
+   "id": "edgworth-re-analyst",
+   "company": "Edgworth Partners (recruiter)",
+   "role": "Real Estate Investment Analyst, European Investor (London)",
+   "applied": "2026-11-15",
+   "status": "Applied",
+   "updated": "2026-11-15",
+   "next": "Applied via LinkedIn on 15 Nov. Recruiter, so expect a call or email.",
+   "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881930294432520811"
+  },
+  {
+   "id": "belmont-acq-analyst",
+   "company": "Belmont Search Ltd (recruiter)",
+   "role": "Acquisitions Analyst, Real Estate Private Equity (Greater London)",
+   "applied": "2026-11-15",
+   "status": "Applied",
+   "updated": "2026-11-15",
+   "next": "Applied via LinkedIn on 15 Nov. Recruiter, so expect a call or email.",
+   "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881930367436193894"
   },
   {
    "id": "tristan-analyst",

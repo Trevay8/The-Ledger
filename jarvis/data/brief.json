@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-15T06:15:00Z",
+ "generated": "2026-11-16T06:20:00Z",
  "sources": [
   "Gmail",
   "Google Calendar",
@@ -12,46 +12,55 @@
  "urgent": [
   {
    "id": "u-bx-rsvp",
-   "title": "Accept Damon Wilson's Blackstone invite (Tue 17 Nov)",
-   "detail": "Catch-up is Tuesday at 17:00 at Berkeley Square House (Crystal Palace room, 3rd floor), two days away. It still shows 'needs action' on both your Gmail and Bayes calendars. Accept it today, then prepare 3 questions.",
+   "title": "Accept Damon Wilson's Blackstone invite. The meeting is tomorrow",
+   "detail": "Catch-up is tomorrow (Tue 17 Nov) at 17:00 at Berkeley Square House (Crystal Palace room, 3rd floor). It still shows 'needs action' on both your Gmail and Bayes calendars. Accept it now, then prepare 3 questions.",
    "area": "network",
-   "due": "2026-11-15",
+   "due": "2026-11-16",
    "priority": "high",
    "link": "https://calendar.google.com/calendar/r/week/2026/11/17"
   },
   {
    "id": "u-eqt",
-   "title": "EQT applications are closed. Be ready for a Superday invite",
-   "detail": "Applications closed on 12 Nov and the Superday is 26 Nov. No invite yet. Tell SEO London the moment one lands. Use today to prep the case study, EQT Real Estate's logistics and living strategies, and what Jay told you on the Zoom.",
+   "title": "EQT: be ready for a Superday invite",
+   "detail": "Applications closed on 12 Nov and the Superday is 26 Nov. No invite yet. Tell SEO London the moment one lands. Prep the case study, EQT Real Estate's logistics and living strategies, and what Jay told you on the Zoom.",
    "area": "apps",
    "due": "2026-11-20",
    "priority": "high",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881112459316162429"
   },
   {
-   "id": "u-income",
-   "title": "Challenge ends today. Decide on Monetise before you pay anything",
-   "detail": "The AI Income Challenge finishes today (17:00 VIP, 18:00 main, UK time). Iman's emails since Friday are pitching Monetise, a paid programme, with split payments and a 'last chance' deadline of 23:59 ET on Saturday. Set your ceiling and what you'd need to see first before you spend. Write one product idea you'll test this month.",
-   "area": "income",
-   "due": "2026-11-15",
+   "id": "u-aic-club",
+   "title": "Promote LSE AIC 2027 to club members (code BARE)",
+   "detail": "The AIC team confirmed a society partnership with the club yesterday: 1 guaranteed paid spot per 40 sign-ups using code BARE. Conference is 8-9 Feb 2027 at the Sheraton Grand, Park Lane. They attached marketing materials. Plan the post and a members email, and note it for the handover to your incoming president.",
+   "area": "club",
+   "due": "2026-11-20",
    "priority": "medium",
-   "link": "#/income"
+   "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881939954532190936"
   },
   {
    "id": "u-dataannot",
-   "title": "Finish your DataAnnotation assessment",
-   "detail": "DataAnnotation emailed on 14 Nov: you must complete the Starter Assessment to finish applying. It's paid remote AI-training work, so it could count toward your side-income target. Check the pay and hours before committing.",
+   "title": "Finish your DataAnnotation Starter Assessment",
+   "detail": "DataAnnotation said on 14 Nov that you must complete the Starter Assessment to finish applying. It's paid remote AI-training work, so it could count toward your side-income target. Check the pay and hours before committing.",
    "area": "income",
    "due": "2026-11-17",
    "priority": "medium",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881827458004657638"
   },
   {
+   "id": "u-income",
+   "title": "Pick one product idea to test before spending on Monetise",
+   "detail": "The AI Income Challenge ended on Sunday and the Monetise 'last chance' pricing email expired on Saturday night. If you're still weighing a paid programme, write down your spend ceiling first. Either way, choose one product from the Income tab to validate this month.",
+   "area": "income",
+   "due": "2026-11-20",
+   "priority": "medium",
+   "link": "#/income"
+  },
+  {
    "id": "u-evercore",
    "title": "Check your Evercore Private Funds Group status",
    "detail": "Your video interview was due 6 Sep and there's been no email since. Log into the portal, confirm whether it's live or closed, then update the tracker.",
    "area": "apps",
-   "due": "2026-11-16",
+   "due": "2026-11-18",
    "priority": "medium",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1875108027848207162"
   }
