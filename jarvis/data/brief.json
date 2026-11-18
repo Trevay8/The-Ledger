@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-17T06:20:00Z",
+ "generated": "2026-11-18T06:20:00Z",
  "sources": [
   "Gmail",
   "Google Calendar",
@@ -11,31 +11,31 @@
  ],
  "urgent": [
   {
-   "id": "u-bx-today",
-   "title": "Blackstone catch-up with Damon Wilson today at 17:00",
-   "detail": "Damon replied yesterday: 'Yes, looking forward to it.' It's at Berkeley Square House, Crystal Palace room, 3rd floor. The calendar invite still shows 'needs action' on both your calendars, so accept it. Prepare 3 questions and leave time to get there.",
+   "id": "u-bx-thanks",
+   "title": "Send Damon Wilson (Blackstone) a thank-you if you haven't already",
+   "detail": "Your catch-up was last night. A short thank-you within 24 hours keeps the relationship warm: one specific thing you took from the conversation and one next step you'll take. Log it in your network tracker.",
    "area": "network",
-   "due": "2026-11-17",
+   "due": "2026-11-18",
    "priority": "high",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-a:r7739645781545780408"
   },
   {
    "id": "u-eqt",
    "title": "EQT: be ready for a Superday invite",
-   "detail": "Applications closed on 12 Nov and the Superday is 26 Nov. No invite yet. Tell SEO London the moment one lands. Prep the case study, EQT Real Estate's logistics and living strategies, and what Jay told you on the Zoom.",
+   "detail": "Applications closed on 12 Nov and the Superday is 26 Nov, eight days away. No invite yet. Tell SEO London the moment one lands. Prep the case study, EQT Real Estate's logistics and living strategies, and what Jay told you on the Zoom.",
    "area": "apps",
    "due": "2026-11-20",
    "priority": "high",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881112459316162429"
   },
   {
-   "id": "u-dataannot",
-   "title": "Finish your DataAnnotation Starter Assessment",
-   "detail": "DataAnnotation said on 14 Nov that you must complete the Starter Assessment to finish applying. It's paid remote AI-training work, so it could count toward your side-income target. Check the pay and hours before committing.",
-   "area": "income",
-   "due": "2026-11-17",
+   "id": "u-moelis",
+   "title": "Moelis: verify your email to continue your application",
+   "detail": "The verification email from your Moelis careers account (16 Nov) is still waiting. Verify it, then check the role and the closing date before you start the form.",
+   "area": "apps",
+   "due": "2026-11-19",
    "priority": "medium",
-   "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881827458004657638"
+   "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1882054965842585809"
   },
   {
    "id": "u-aic-club",
@@ -47,18 +47,18 @@
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881939954532190936"
   },
   {
-   "id": "u-moelis",
-   "title": "Moelis: verify your email to continue your application",
-   "detail": "You started a Moelis careers account last night and the verification email is waiting. Verify it, then check the role and the closing date before you start the form.",
-   "area": "apps",
-   "due": "2026-11-19",
+   "id": "u-dataannot",
+   "title": "Finish your DataAnnotation Starter Assessment",
+   "detail": "DataAnnotation said on 14 Nov that you must complete the Starter Assessment to finish applying. It's paid remote AI-training work, so it could count toward your side-income target. Check the pay and hours before committing.",
+   "area": "income",
+   "due": "2026-11-20",
    "priority": "medium",
-   "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1882054965842585809"
+   "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881827458004657638"
   },
   {
    "id": "u-income",
-   "title": "Pick one product idea to test before spending on Monetise",
-   "detail": "The AI Income Challenge has ended and the Monetise 'last chance' pricing expired on Saturday night. If you're still weighing a paid programme, write down your spend ceiling first. Either way, choose one product from the Income tab to validate this month.",
+   "title": "Pick one product idea to test this month",
+   "detail": "The AI Income Challenge has ended. Before you spend on any paid programme, write down your ceiling. Either way, choose one product from the Income tab to validate: the outreach playbook or the modelling templates are the strongest fit.",
    "area": "income",
    "due": "2026-11-20",
    "priority": "medium",
@@ -66,13 +66,6 @@
   }
  ],
  "events": [
-  {
-   "date": "2026-11-17T17:00:00",
-   "end": "2026-11-17T17:30:00",
-   "title": "Catch-up: Damon Wilson, Blackstone",
-   "where": "Berkeley Square House, 4-19 Berkeley Square, W1J 6BD (Crystal Palace room, 3rd floor)",
-   "area": "network"
-  },
   {
    "date": "2026-11-18T18:30:00",
    "end": "2026-11-18T19:30:00",
