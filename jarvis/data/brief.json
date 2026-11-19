@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-18T06:20:00Z",
+ "generated": "2026-11-19T06:20:00Z",
  "sources": [
   "Gmail",
   "Google Calendar",
@@ -11,18 +11,9 @@
  ],
  "urgent": [
   {
-   "id": "u-bx-thanks",
-   "title": "Send Damon Wilson (Blackstone) a thank-you if you haven't already",
-   "detail": "Your catch-up was last night. A short thank-you within 24 hours keeps the relationship warm: one specific thing you took from the conversation and one next step you'll take. Log it in your network tracker.",
-   "area": "network",
-   "due": "2026-11-18",
-   "priority": "high",
-   "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-a:r7739645781545780408"
-  },
-  {
    "id": "u-eqt",
    "title": "EQT: be ready for a Superday invite",
-   "detail": "Applications closed on 12 Nov and the Superday is 26 Nov, eight days away. No invite yet. Tell SEO London the moment one lands. Prep the case study, EQT Real Estate's logistics and living strategies, and what Jay told you on the Zoom.",
+   "detail": "Applications closed on 12 Nov and the Superday is 26 Nov, a week away. No invite yet. Tell SEO London the moment one lands. Prep the case study, EQT Real Estate's logistics and living strategies, and what Jay told you on the Zoom.",
    "area": "apps",
    "due": "2026-11-20",
    "priority": "high",
@@ -33,9 +24,18 @@
    "title": "Moelis: verify your email to continue your application",
    "detail": "The verification email from your Moelis careers account (16 Nov) is still waiting. Verify it, then check the role and the closing date before you start the form.",
    "area": "apps",
-   "due": "2026-11-19",
+   "due": "2026-11-20",
    "priority": "medium",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1882054965842585809"
+  },
+  {
+   "id": "u-club-speaker",
+   "title": "Line up a speaker or sponsor for your first club event",
+   "detail": "Tristan Capital replied on 18 Nov: no insight programme this year and they can't support a club event. Zorin Finance (George Cresswell and Anthony Raud) haven't replied since your 28 Oct emails. Send a short nudge to Zorin and pick two other firms from your network tracker that have Bayes alumni.",
+   "area": "club",
+   "due": "2026-11-26",
+   "priority": "medium",
+   "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1877210089587758716"
   },
   {
    "id": "u-aic-club",
@@ -60,19 +60,12 @@
    "title": "Pick one product idea to test this month",
    "detail": "The AI Income Challenge has ended. Before you spend on any paid programme, write down your ceiling. Either way, choose one product from the Income tab to validate: the outreach playbook or the modelling templates are the strongest fit.",
    "area": "income",
-   "due": "2026-11-20",
+   "due": "2026-11-22",
    "priority": "medium",
    "link": "#/income"
   }
  ],
  "events": [
-  {
-   "date": "2026-11-18T18:30:00",
-   "end": "2026-11-18T19:30:00",
-   "title": "Haircut, Huss Cutz",
-   "where": "145 Hastings Road, Bromley",
-   "area": "life"
-  },
   {
    "date": "2026-11-26",
    "title": "EQT Real Estate Superday (if invited)",

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-18T06:20:00Z",
+ "generated": "2026-11-19T06:20:00Z",
  "role": "Co-President, Bayes Real Estate Club. Your focus: events.",
  "note": "Club admin mostly runs through your Bayes Outlook. Once it's connected, I'll pull room bookings, speaker threads and committee emails into this tab.",
  "stages": [
@@ -51,6 +51,13 @@
    "status": "Awaiting reply",
    "date": "2026-10-28",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1880237113817468799"
+  },
+  {
+   "who": "Tristan Capital Partners (HR team)",
+   "what": "18 Nov: no insight programme this year, can't support a club event. Will be in touch if that changes.",
+   "status": "Declined for now",
+   "date": "2026-11-18",
+   "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1877210089587758716"
   }
  ],
  "seedTasks": [
