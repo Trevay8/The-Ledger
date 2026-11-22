@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-21T06:15:00Z",
+ "generated": "2026-11-22T06:15:00Z",
  "sources": [
   "Gmail",
   "Google Calendar",
@@ -13,7 +13,7 @@
   {
    "id": "u-eqt",
    "title": "EQT: be ready for a Superday invite",
-   "detail": "Superday is 26 Nov, five days away. No invite in Gmail yet. Tell SEO London the moment one lands. Prep the case study, EQT Real Estate strategies, and what Jay told you on the Zoom. Use the weekend.",
+   "detail": "Superday is 26 Nov, four days away. No invite in Gmail yet. Tell SEO London the moment one lands. Prep the case study, EQT Real Estate strategies, and what Jay told you on the Zoom. Today is the best prep day.",
    "area": "apps",
    "due": "2026-11-24",
    "priority": "high",
@@ -24,7 +24,7 @@
    "title": "Part-time role outreach: read HDWE's reply, Portman is a no",
    "detail": "Howard de Walden sent you a letter on opportunities (PDF, 19 Nov), so read it and reply to Florence Saxer. Portman said no suitable vacancies (watch their LinkedIn). Greykite sent an auto-reply only. Target: a Jan start, 2-3 days a week.",
    "area": "apps",
-   "due": "2026-11-23",
+   "due": "2026-11-24",
    "priority": "high",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1882285002902139431"
   },
@@ -33,7 +33,7 @@
    "title": "Moelis: verify your email to continue your application",
    "detail": "The verification email from your Moelis careers account (16 Nov) is still waiting. Verify it, then check the role and the closing date before you start the form.",
    "area": "apps",
-   "due": "2026-11-24",
+   "due": "2026-11-25",
    "priority": "medium",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1882054965842585809"
   },
@@ -51,7 +51,7 @@
    "title": "Promote LSE AIC 2027 to club members (code BARE)",
    "detail": "The AIC team confirmed a society partnership: 1 guaranteed paid spot per 40 sign-ups with code BARE. Conference is 8-9 Feb 2027 at the Sheraton Grand, Park Lane. Plan the post and a members email, and note it for the handover to your incoming president.",
    "area": "club",
-   "due": "2026-11-24",
+   "due": "2026-11-25",
    "priority": "medium",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881939954532190936"
   },
@@ -60,7 +60,7 @@
    "title": "Finish your DataAnnotation Starter Assessment",
    "detail": "DataAnnotation said on 14 Nov that you must complete the Starter Assessment to finish applying. It's paid remote AI-training work, so it could count toward your side-income target. Check the pay and hours before committing.",
    "area": "income",
-   "due": "2026-11-24",
+   "due": "2026-11-25",
    "priority": "medium",
    "link": "https://mail.google.com/mail/?authuser=trevayanderson2005@gmail.com#all/thread-f:1881827458004657638"
   }
@@ -84,6 +84,14 @@
    "title": "Danielle's 50th Birthday",
    "where": "2210 by NattyCanCook",
    "area": "life"
+  },
+  {
+   "date": "2026-12-09",
+   "end": "2026-12-10",
+   "title": "REA London Mini City Trip (accepted)",
+   "where": "London. Details on app.rea.network",
+   "area": "network",
+   "allDay": true
   }
  ]
 }
